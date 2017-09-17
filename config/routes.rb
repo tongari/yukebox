@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :track_lists, only:[:index]
-  resources :tracks, only:[:index, :new, :create, :edit, :update ,:destroy]
+  resources :tracks, only:[:show, :create, :edit, :update ,:destroy]
 
   root 'track_lists#index'
 end

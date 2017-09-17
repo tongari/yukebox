@@ -86,3 +86,10 @@ editTrack.addEventListener('click', function (e) {
   var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
   connectTrack('put', '/tracks/'+edit_delete_id);
 });
+
+var deleteTrack = document.querySelector('.js-deleteTrack');
+deleteTrack.addEventListener('click', function (e) {
+  e.preventDefault();
+  var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
+  connectTrack('delete', '/tracks/'+edit_delete_id);
+});

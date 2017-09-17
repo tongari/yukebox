@@ -45,6 +45,23 @@ class TracksController < ApplicationController
     end
   end
 
+  def destroy
+    @track = Track.find(params[:id])
+    if @track.destroy
+      render json: {
+        :success => true
+      }
+    else
+      render json: {
+        :error => @track.errors.full_messages.as_json,
+        :success => false,
+        :message => '削除に失敗しました'
+      }
+    end
+
+  end
+
+
 
 
   private
