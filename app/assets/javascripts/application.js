@@ -24,12 +24,16 @@ logout.addEventListener('click',function (e) {
   var xhr = new XMLHttpRequest();
   xhr.open('delete', '/users/sign_out', true);
   xhr.setRequestHeader('X-CSRF-Token', csrf_token);
-  xhr.onload = function () {
-    location.href= '/users/sign_in'
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status < 400 ){
+      location.href= '/users/sign_in'
+    }
+    else if (xhr.readyState === 4 && xhr.status >= 400 ){
+      alert('error');
+    }
   };
   xhr.onerror =function () {
    alert('error');
   };
   xhr.send(null);
-
 });
