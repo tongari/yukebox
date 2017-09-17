@@ -52,6 +52,21 @@ class TrackListsController < ApplicationController
     end
   end
 
+  def destroy
+    @trackList = TrackList.find(params[:id])
+    if @trackList.destroy
+      render json: {
+        :success => true
+      }
+    else
+      render json: {
+        :error => @trackList.errors.full_messages.as_json,
+        :success => false,
+        :message => '削除に失敗しました'
+      }
+    end
+  end
+
 
   private
     def trackList_params
