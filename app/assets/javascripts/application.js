@@ -59,7 +59,7 @@ addTrack.addEventListener('click', function (e) {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status < 400 ){
       var res = JSON.parse(xhr.response);
-      if (res.result){
+      if (res.success){
         alert(res.result);
       } else {
         alert(res.message);

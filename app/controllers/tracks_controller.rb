@@ -7,26 +7,25 @@ class TracksController < ApplicationController
 
 
   def create
-    @tracks = Track.where(track_id: params[:id])
+    @tracks = Track.where(track_id: params[:track_id])
     if(@tracks.count === 10)
       render json: {
-        :result => false,
-        :message => '既に登録数が10件となっています。'
+        :success => false,
+        :message => '１つのアルバムには10件以上は登録できません！'
       }
     else
       @track = Track.new(track_params)
       if @track.save
         render json: {
-          :result => true
+          :success => true
         }
       else
         render json: {
           :error => @track.errors.full_messages.as_json,
-          :result => false,
+          :success => false,
           :message => '登録に失敗しました'
         }
       end
-
     end
   end
 
