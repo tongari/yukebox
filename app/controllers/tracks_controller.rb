@@ -29,6 +29,24 @@ class TracksController < ApplicationController
     end
   end
 
+  def update
+    @track = Track.find(params[:id])
+    if @track.update(track_params)
+      render json: {
+        :success => true,
+        :data => @track
+      }
+    else
+      render json: {
+        :error => @track.errors.full_messages.as_json,
+        :success => false,
+        :message => '編集に失敗しました'
+      }
+    end
+  end
+
+
+
   private
     def track_params
       params.require(:track).permit(

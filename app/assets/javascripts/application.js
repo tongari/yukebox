@@ -38,29 +38,28 @@ logout.addEventListener('click', function (e) {
   xhr.send(null);
 });
 
-var addTrack = document.querySelector('.js-addTrack');
-addTrack.addEventListener('click', function (e) {
-  e.preventDefault();
 
-  var sendData = {
-    track_id: document.querySelector("input[name='add_track_id']").value,
-    user_id: document.querySelector("input[name='add_user_id']").value,
-    video_id: document.querySelector("input[name='add_video_id']").value,
-    track_num: document.querySelector("input[name='add_track_num']").value,
-    track_title: document.querySelector("input[name='add_track_title']").value
+function setTrackParams() {
+  return {
+    track_id: document.querySelector("input[name='track_id']").value,
+    user_id: document.querySelector("input[name='user_id']").value,
+    video_id: document.querySelector("input[name='video_id']").value,
+    track_num: document.querySelector("input[name='track_num']").value,
+    track_title: document.querySelector("input[name='track_title']").value
   };
+}
 
-
+function connectTrack(method, url) {
   var csrf_token = document.querySelector("meta[name='csrf-token']").content;
   var xhr = new XMLHttpRequest();
-  xhr.open('post', '/tracks', true);
+  xhr.open(method, url, true);
   xhr.setRequestHeader('X-CSRF-Token', csrf_token);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status < 400 ){
       var res = JSON.parse(xhr.response);
       if (res.success){
-        alert(res.result);
+        alert(res.success);
       } else {
         alert(res.message);
       }
@@ -72,5 +71,18 @@ addTrack.addEventListener('click', function (e) {
   xhr.onerror =function () {
     alert('error');
   };
-  xhr.send(JSON.stringify(sendData));
+  xhr.send(JSON.stringify(setTrackParams()));
+}
+
+var addTrack = document.querySelector('.js-addTrack');
+addTrack.addEventListener('click', function (e) {
+  e.preventDefault();
+  connectTrack('post', '/tracks');
+});
+
+var addTrack = document.querySelector('.js-editTrack');
+addTrack.addEventListener('click', function (e) {
+  e.preventDefault();
+  var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
+  connectTrack('put', '/tracks/'+edit_delete_id);
 });
