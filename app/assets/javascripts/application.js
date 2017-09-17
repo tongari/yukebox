@@ -49,7 +49,14 @@ function setTrackParams() {
   };
 }
 
-function connectTrack(method, url) {
+function setAlbumParams() {
+  return {
+    title: document.querySelector("input[name='track_lists_title']").value,
+    user_id: document.querySelector("input[name='track_lists_user_id']").value
+  };
+}
+
+function connectTrack(method, url, params) {
   var csrf_token = document.querySelector("meta[name='csrf-token']").content;
   var xhr = new XMLHttpRequest();
   xhr.open(method, url, true);
@@ -71,25 +78,33 @@ function connectTrack(method, url) {
   xhr.onerror =function () {
     alert('error');
   };
-  xhr.send(JSON.stringify(setTrackParams()));
+  xhr.send(JSON.stringify(params));
 }
 
 var addTrack = document.querySelector('.js-addTrack');
 addTrack.addEventListener('click', function (e) {
   e.preventDefault();
-  connectTrack('post', '/tracks');
+  connectTrack('post', '/tracks', setTrackParams());
 });
 
 var editTrack = document.querySelector('.js-editTrack');
 editTrack.addEventListener('click', function (e) {
   e.preventDefault();
   var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
-  connectTrack('put', '/tracks/'+edit_delete_id);
+  connectTrack('put', '/tracks/'+edit_delete_id, setTrackParams());
 });
 
 var deleteTrack = document.querySelector('.js-deleteTrack');
 deleteTrack.addEventListener('click', function (e) {
   e.preventDefault();
   var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
-  connectTrack('delete', '/tracks/'+edit_delete_id);
+  connectTrack('delete', '/tracks/'+edit_delete_id, setTrackParams());
+});
+
+
+
+var addAlbum = document.querySelector('.js-addAlbum');
+addAlbum.addEventListener('click', function (e) {
+  e.preventDefault();
+  connectTrack('post', '/track_lists', setAlbumParams());
 });

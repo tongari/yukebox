@@ -5,7 +5,6 @@ class TracksController < ApplicationController
     render json: @track
   end
 
-
   def create
     @tracks = Track.where(track_id: params[:track_id])
     if(@tracks.count === 10)
