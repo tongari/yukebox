@@ -13,6 +13,13 @@ class TracksController < ApplicationController
         :message => '１つのアルバムには10件以上は登録できません！'
       }
     else
+      # tracks = []
+      # params[:video_id].each_with_index do |item, idx|
+      #   tracks << Track.new(track_params)
+      # end
+      # @track = Track.import tracks
+      # if @track
+
       @track = Track.new(track_params)
       if @track.save
         render json: {

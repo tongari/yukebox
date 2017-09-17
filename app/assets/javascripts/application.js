@@ -39,6 +39,25 @@ logout.addEventListener('click', function (e) {
 });
 
 
+// function setTrackParams() {
+//   return {
+//     track_id: document.querySelector("input[name='track_id']").value,
+//     user_id: document.querySelector("input[name='user_id']").value,
+//     video_id: (function () {
+//       var values = document.querySelectorAll("input[name='video_id[]']");
+//       var result = [];
+//
+//       values.forEach(function (item) {
+//         result.push(item.value);
+//       });
+//
+//       return result;
+//     })(),
+//     track_num: document.querySelector("input[name='track_num']").value,
+//     track_title: document.querySelector("input[name='track_title']").value
+//   };
+// }
+
 function setTrackParams() {
   return {
     track_id: document.querySelector("input[name='track_id']").value,
