@@ -64,10 +64,7 @@ class TracksController < ApplicationController
         :message => '削除に失敗しました'
       }
     end
-
   end
-
-
 
 
   private

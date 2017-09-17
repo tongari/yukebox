@@ -36,6 +36,23 @@ class TrackListsController < ApplicationController
   end
 
 
+  def update
+    @trackList = TrackList.find(params[:id])
+    if @trackList.update(trackList_params)
+      render json: {
+        :success => true,
+        :data => @trackList
+      }
+    else
+      render json: {
+        :error => @trackList.errors.full_messages.as_json,
+        :success => false,
+        :message => '編集に失敗しました'
+      }
+    end
+  end
+
+
   private
     def trackList_params
       params.require(:track_list).permit(

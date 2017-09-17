@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
 
-  resources :track_lists, only:[:index, :create, :edit, :update ,:destroy]
-  resources :tracks, only:[:show, :create, :edit, :update ,:destroy]
+  resources :track_lists, only:[:index, :create, :update ,:destroy]
+  resources :tracks, only:[:show, :create, :update ,:destroy]
 
   root 'track_lists#index'
 end

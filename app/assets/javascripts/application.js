@@ -127,3 +127,10 @@ addAlbum.addEventListener('click', function (e) {
   e.preventDefault();
   connectTrack('post', '/track_lists', setAlbumParams());
 });
+
+var editAlbum = document.querySelector('.js-editAlbum');
+editAlbum.addEventListener('click', function (e) {
+  e.preventDefault();
+  var edit_delete_id = document.querySelector("input[name='track_lists_edit_delete_id']").value;
+  connectTrack('put', '/track_lists/'+edit_delete_id, setAlbumParams());
+});
