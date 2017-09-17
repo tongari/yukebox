@@ -80,8 +80,8 @@ addTrack.addEventListener('click', function (e) {
   connectTrack('post', '/tracks');
 });
 
-var addTrack = document.querySelector('.js-editTrack');
-addTrack.addEventListener('click', function (e) {
+var editTrack = document.querySelector('.js-editTrack');
+editTrack.addEventListener('click', function (e) {
   e.preventDefault();
   var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
   connectTrack('put', '/tracks/'+edit_delete_id);
