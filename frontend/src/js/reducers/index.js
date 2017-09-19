@@ -1,8 +1,7 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import playList from './playList';
 
-const rootReducer = combineReducers({
-  routing: routerReducer,
-});
+const reducers = {
+  playList,
+};
 
-export default rootReducer;
+export default reducers;
