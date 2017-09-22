@@ -33,7 +33,7 @@ end
   track_id = 1
   user_id = 1
   video_id = item
-  track_num = idx
+  track_num = idx.to_i
   track_title = "ミスチルtrackその #{idx}"
 
   Track.create(

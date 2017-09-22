@@ -52,7 +52,7 @@ const jsConfig = ((env)=> {
     extensions: ['.js', '.jsx']
   };
 
-  return {entry, output, module, plugins, resolve}
+  return {entry, output, module, plugins, resolve, devtool: 'inline-source-map'}
 })(process.env.NODE_ENV);
 
 

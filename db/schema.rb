@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 20170917054747) do
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.integer  "track_id",    null: false
-    t.integer  "user_id",     null: false
-    t.string   "video_id",    null: false
-    t.string   "track_num",   null: false
-    t.string   "track_title", null: false
+    t.integer  "track_id"
+    t.integer  "user_id"
+    t.string   "video_id"
+    t.integer  "track_num"
+    t.string   "track_title"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

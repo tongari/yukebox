@@ -1,4 +1,5 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as playListActions from './../actions/playList';
@@ -22,6 +23,10 @@ const style = () => (
  * PlayListContainer
  */
 class PlayListContainer extends React.Component {
+  componentWillMount() {
+    this.props.playListActions.fetchPlayList();
+  }
+
   render() {
     // const { store, bActions } = this.props;
     return (
@@ -63,7 +68,7 @@ const mapStateToProps = state => ({
   store: state,
 });
 const mapDispatchToProps = dispatch => ({
-  bActions: bindActionCreators(playListActions, dispatch),
+  playListActions: bindActionCreators(playListActions, dispatch),
 });
 export default connect(
   mapStateToProps,

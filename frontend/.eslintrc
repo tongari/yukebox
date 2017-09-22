@@ -17,9 +17,10 @@
     "react/jsx-boolean-value": 0,
     "import/imports-first":0,
     "import/prefer-default-export":0,
-    "jsx-a11y/href-no-hash": "off",
-    "no-underscore-dangle": "off",
-    "no-debugger": 1
+    "jsx-a11y/href-no-hash": 0,
+    "no-underscore-dangle": 0,
+    "no-debugger": 1,
+    "arrow-body-style": 0
   },
   "env": {
     "browser": true,
