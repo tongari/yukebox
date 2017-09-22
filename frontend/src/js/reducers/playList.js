@@ -11,7 +11,7 @@ const playList = (state = new PlayList(), action) => {
     case playListActions.FETCH_PLAY_LIST_SUCCESS: {
       return state.withMutations((s) => {
         s.set('isFetching', false)
-          .set('playListData', Immutable.List(action.response));
+          .set('playListData', Immutable.List(action.response.data));
       });
     }
 

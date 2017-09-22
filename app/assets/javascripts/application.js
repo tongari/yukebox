@@ -68,13 +68,6 @@ function setTrackParams() {
   };
 }
 
-function setAlbumParams() {
-  return {
-    title: document.querySelector("input[name='track_lists_title']").value,
-    user_id: document.querySelector("input[name='track_lists_user_id']").value
-  };
-}
-
 function connectTrack(method, url, params) {
   var csrf_token = document.querySelector("meta[name='csrf-token']").content;
   var xhr = new XMLHttpRequest();
@@ -118,26 +111,4 @@ deleteTrack.addEventListener('click', function (e) {
   e.preventDefault();
   var edit_delete_id = document.querySelector("input[name='edit_delete_id']").value;
   connectTrack('delete', '/tracks/'+edit_delete_id, setTrackParams());
-});
-
-
-
-var addAlbum = document.querySelector('.js-addAlbum');
-addAlbum.addEventListener('click', function (e) {
-  e.preventDefault();
-  connectTrack('post', '/track_lists', setAlbumParams());
-});
-
-var editAlbum = document.querySelector('.js-editAlbum');
-editAlbum.addEventListener('click', function (e) {
-  e.preventDefault();
-  var edit_delete_id = document.querySelector("input[name='track_lists_edit_delete_id']").value;
-  connectTrack('put', '/track_lists/'+edit_delete_id, setAlbumParams());
-});
-
-var deleteAlbum = document.querySelector('.js-deleteAlbum');
-deleteAlbum.addEventListener('click', function (e) {
-  e.preventDefault();
-  var edit_delete_id = document.querySelector("input[name='track_lists_edit_delete_id']").value;
-  connectTrack('delete', '/track_lists/'+edit_delete_id, setAlbumParams());
 });

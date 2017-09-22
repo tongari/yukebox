@@ -1,3 +1,4 @@
 node_modules/
-webpack.config.babel.js
-bs-config.js
+./webpack.config.babel.js
+./bs-config.js
+./app

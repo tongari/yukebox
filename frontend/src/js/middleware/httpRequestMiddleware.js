@@ -21,6 +21,7 @@ const fetch = (action, csrfToken = null) => {
         if (res.success) {
           resolve(res);
         } else {
+          window.alert(res.message);
           resolve(res);
         }
       } else if (xhr.readyState === 4 && xhr.status >= 400) {

@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, BrowserRouter, Link } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import routerPath from './config/router';
 import configStore from './store/configStore';
 import AppContainer from './containers/AppContainer';

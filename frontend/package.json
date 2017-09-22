@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "webpack --progress --optimize-minimize",
-    "watch": "webpack --progress --watch",
+    "watch": "webpack --progress --watch --devtool source-map",
     "server": "browser-sync start --config bs-config.js",
     "prod": "NODE_ENV=prod yarn run deploy",
     "dev": "yarn run watch"

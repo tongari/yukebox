@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+// import Immutable from 'immutable';
 import * as appActions from '../actions/app';
 import App from '../models/App';
 

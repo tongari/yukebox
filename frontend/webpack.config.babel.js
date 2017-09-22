@@ -29,8 +29,8 @@ const jsConfig = ((env)=> {
         test: /\.jsx?$/,
         exclude: /(node_modules)|(\.DS_Store$)/,
         use: [
-          { loader: 'babel-loader' },
-          { loader: 'eslint-loader' }
+          { loader: 'babel-loader' }
+          // { loader: 'eslint-loader' }
         ]
       }
     ]
@@ -52,7 +52,8 @@ const jsConfig = ((env)=> {
     extensions: ['.js', '.jsx']
   };
 
-  return {entry, output, module, plugins, resolve, devtool: 'inline-source-map'}
+  // return {entry, output, module, plugins, resolve, devtool: 'inline-source-map'}
+  return {entry, output, module, plugins, resolve}
 })(process.env.NODE_ENV);
 
 

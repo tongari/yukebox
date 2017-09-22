@@ -28,7 +28,6 @@ class PlayListContainer extends React.Component {
   }
 
   render() {
-    // const { store, bActions } = this.props;
     return (
       <div>
         <ul>
