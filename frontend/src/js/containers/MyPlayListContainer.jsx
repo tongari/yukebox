@@ -11,9 +11,10 @@ class MyPlayListContainer extends React.Component {
   constructor() {
     super();
     this.onChangeMyListTitle = this.onChangeMyListTitle.bind(this);
-    this.onShowMyListTitleInput = this.onShowMyListTitleInput.bind(this);
+    this.onClickMyListTitleInput = this.onClickMyListTitleInput.bind(this);
     this.onSubmitMyListTitle = this.onSubmitMyListTitle.bind(this);
     this.onSubmitDeleteMyListTitle = this.onSubmitDeleteMyListTitle.bind(this);
+    this.onSubmitAddTrack = this.onSubmitAddTrack.bind(this);
   }
 
   componentWillMount() {
@@ -24,33 +25,49 @@ class MyPlayListContainer extends React.Component {
     this.props.myPlayListActions.changeMyListTitle(e.target.value);
   }
 
-  onShowMyListTitleInput(e) {
+  onClickMyListTitleInput(e) {
     e.preventDefault();
     this.props.myPlayListActions.showMyListTitleInput();
   }
 
-  onShowMyListTitleInputEdit(id, e) {
+  onClickMyListTitleInputEdit(id, e) {
     e.preventDefault();
-    this.props.myPlayListActions.onShowMyListTitleInputEdit(id);
+    this.props.myPlayListActions.showMyListTitleInputEdit(id);
   }
 
   onSubmitMyListTitle(e) {
     e.preventDefault();
     if (this.props.store.myPlayList.get('isEditTitle')) {
-      this.props.myPlayListActions.submitUpdateMyListTitle();
+      this.props.myPlayListActions.updateMyListTitle();
     } else {
-      this.props.myPlayListActions.submitCreateMyListTitle();
+      this.props.myPlayListActions.createMyListTitle();
     }
   }
 
   onSubmitDeleteMyListTitle(id, e) {
     e.preventDefault();
-    this.props.myPlayListActions.submitDeleteMyListTitle(id);
+    this.props.myPlayListActions.deleteMyListTitle(id);
+  }
+
+  onClickShowAddTrack(id, e) {
+    e.preventDefault();
+    this.props.myPlayListActions.showAddTrack(id);
+  }
+
+  onSubmitAddTrack(e) {
+    e.preventDefault();
+    this.props.myPlayListActions.addTrack();
   }
 
   titleInputStyle() {
     return {
       display: (this.props.store.myPlayList.get('isDisplayTitleInput')) ? 'block' : 'none',
+    };
+  }
+
+  addTrackStyle() {
+    return {
+      display: (this.props.store.myPlayList.get('isDisplayAddTrack')) ? 'block' : 'none',
     };
   }
 
@@ -62,7 +79,7 @@ class MyPlayListContainer extends React.Component {
     return (
       <div>
         <h1>マイプレイリスト</h1>
-        <a href="#" onClick={this.onShowMyListTitleInput}>プレイリスト作成</a>
+        <a href="#" onClick={this.onClickMyListTitleInput}>プレイリスト作成</a>
         <div style={this.titleInputStyle()}>
           <textarea
             maxLength={50}
@@ -75,6 +92,14 @@ class MyPlayListContainer extends React.Component {
           <a href="#" onClick={this.onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
         </div>
 
+        <div style={this.addTrackStyle()}>
+          <a
+            href="#"
+            onClick={this.onSubmitAddTrack}
+          >曲の追加</a>
+        </div>
+
+
         {
           myPlayList.map((item) => {
             return (
@@ -82,13 +107,18 @@ class MyPlayListContainer extends React.Component {
                 <h2>{item.title}</h2>
                 <a
                   href="#"
-                  onClick={this.onShowMyListTitleInputEdit.bind(this, item.id)}
+                  onClick={this.onClickMyListTitleInputEdit.bind(this, item.id)}
                 >プレイリスト名変更</a>
                 <br />
                 <a
                   href="#"
                   onClick={this.onSubmitDeleteMyListTitle.bind(this, item.id)}
                 >プレイリスト削除</a>
+                <br />
+                <a
+                  href="#"
+                  onClick={this.onClickShowAddTrack.bind(this, item.id)}
+                >曲の追加</a>
               </aritcle>
 
             );

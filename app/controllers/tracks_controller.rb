@@ -1,33 +1,40 @@
 class TracksController < ApplicationController
 
   def show
-    @track = Track.where(track_id: params[:id])
-    render json: @track
+    tracks = Track.where(track_id: params[:id])
+    render json: {
+      :success => true,
+      :data => tracks,
+    }
   end
 
   def create
-    @tracks = Track.where(track_id: params[:track_id])
-    if(@tracks.count === 10)
+    tracks = Track.where(track_id: params[:track_id])
+    if(tracks.count === 10)
       render json: {
         :success => false,
         :message => '１つのアルバムには10件以上は登録できません！'
       }
     else
-      # tracks = []
-      # params[:video_id].each_with_index do |item, idx|
-      #   tracks << Track.new(track_params)
-      # end
-      # @track = Track.import tracks
-      # if @track
-
-      @track = Track.new(track_params)
-      if @track.save
+      len = tracks.count;
+      bulkTracks = []
+      params[:video_ids].each_with_index do |item, idx|
+        params[:track][:video_id] = item;
+        params[:track][:track_title] = params[:track_titles][idx];
+        params[:track][:track_num] = len+idx+1;
+        params[:track][:user_id] = current_user.id
+        bulkTracks << Track.new(track_params)
+      end
+      newTrack = Track.import bulkTracks
+      if newTrack
+        resTracks = Track.where(track_id: params[:track_id]).order('track_num ASC')
         render json: {
-          :success => true
+          :success => true,
+          :data => resTracks
         }
       else
         render json: {
-          :error => @track.errors.full_messages.as_json,
+          :error => newTrack.errors.full_messages.as_json,
           :success => false,
           :message => '登録に失敗しました'
         }
@@ -35,16 +42,17 @@ class TracksController < ApplicationController
     end
   end
 
+
   def update
-    @track = Track.find(params[:id])
-    if @track.update(track_params)
+    track = Track.find(params[:id])
+    if track.update(track_params)
       render json: {
         :success => true,
-        :data => @track
+        :data => track
       }
     else
       render json: {
-        :error => @track.errors.full_messages.as_json,
+        :error => track.errors.full_messages.as_json,
         :success => false,
         :message => '編集に失敗しました'
       }
@@ -52,14 +60,14 @@ class TracksController < ApplicationController
   end
 
   def destroy
-    @track = Track.find(params[:id])
-    if @track.destroy
+    track = Track.find(params[:id])
+    if track.destroy
       render json: {
         :success => true
       }
     else
       render json: {
-        :error => @track.errors.full_messages.as_json,
+        :error => track.errors.full_messages.as_json,
         :success => false,
         :message => '削除に失敗しました'
       }

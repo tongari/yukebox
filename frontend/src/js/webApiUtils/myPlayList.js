@@ -47,13 +47,13 @@ export const createMyPlayList = ({ type, title }) => {
  * @param id
  * @returns {{type: *, payload: {request: {method: string, url: string, params: {title}}}}}
  */
-export const updateMyPlayList = ({ type, title, id }) => {
+export const updateMyPlayList = ({ type, title, editId }) => {
   return ({
     type,
     payload: {
       request: {
         method: 'put',
-        url: `/track_lists/${id}`,
+        url: `/track_lists/${editId}`,
         params: {
           title: title.trim(),
         },
@@ -75,6 +75,40 @@ export const deleteMyPlayList = ({ type, id }) => {
       request: {
         method: 'delete',
         url: `/track_lists/${id}`,
+      },
+    },
+  });
+};
+
+export const createTrack = ({ type, track_id, video_ids, track_titles }) => {
+  return ({
+    type,
+    payload: {
+      request: {
+        method: 'post',
+        url: '/tracks',
+        params: {
+          track_id,
+          video_ids,
+          track_titles,
+        },
+      },
+    },
+  });
+};
+
+export const updateTrack = ({ type, track_id, ids, track_nums }) => {
+  return ({
+    type,
+    payload: {
+      request: {
+        method: 'put',
+        url: '/tracks',
+        params: {
+          track_id,
+          ids,
+          track_nums,
+        },
       },
     },
   });

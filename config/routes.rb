@@ -18,5 +18,6 @@ Rails.application.routes.draw do
 
   # 個別APIのルーティング
   get '/my-album', to: 'track_lists#myAlbum'
+  get '/my-edit-track', to: 'tracks#bulkEdit'
 
 end

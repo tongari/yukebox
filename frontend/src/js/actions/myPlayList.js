@@ -15,41 +15,16 @@ export const UPDATE_MY_PLAYLIST_TITLE_FAILURE = 'UPDATE_MY_PLAYLIST_TITLE_FAILUR
 export const CHANGE_MY_LIST_TITLE = 'CHANGE_MY_LIST_TITLE';
 export const SHOW_MY_LIST_TITLE_INPUT = 'SHOW_MY_LIST_TITLE_INPUT';
 export const SHOW_MY_LIST_TITLE_INPUT_EDIT = 'SHOW_MY_LIST_TITLE_INPUT_EDIT';
+export const SHOW_ADD_TRACK = 'SHOW_ADD_TRACK';
 
 
-const createMyPlayList = (title) => {
-  return (dispatch) => {
-    return dispatch(
-      webApiUtils.createMyPlayList({
-        type: CREATE_MY_PLAYLIST,
-        title,
-      }),
-    );
-  };
-};
+export const ADD_TRACK = 'ADD_TRACK';
+export const ADD_TRACK_SUCCESS = 'ADD_TRACK_SUCCESS';
+export const ADD_TRACK_FAILURE = 'ADD_TRACK_FAILURE';
 
-const updateMyPlayList = (title, id) => {
-  return (dispatch) => {
-    return dispatch(
-      webApiUtils.updateMyPlayList({
-        type: UPDATE_MY_PLAYLIST_TITLE,
-        title,
-        id,
-      }),
-    );
-  };
-};
-
-const deleteMyPlayList = (id) => {
-  return (dispatch) => {
-    return dispatch(
-      webApiUtils.deleteMyPlayList({
-        type: UPDATE_MY_PLAYLIST_TITLE,
-        id,
-      }),
-    );
-  };
-};
+export const EDIT_TRACK = 'EDIT_TRACK';
+export const EDIT_TRACK_SUCCESS = 'EDIT_TRACK_SUCCESS';
+export const EDIT_TRACK_FAILURE = 'EDIT_TRACK_FAILURE';
 
 
 export const getMyPlayList = () => {
@@ -61,7 +36,6 @@ export const getMyPlayList = () => {
     );
   };
 };
-
 
 export const changeMyListTitle = (title) => {
   return {
@@ -76,7 +50,7 @@ export const showMyListTitleInput = () => {
   };
 };
 
-export const onShowMyListTitleInputEdit = (editId) => {
+export const showMyListTitleInputEdit = (editId) => {
   return {
     type: SHOW_MY_LIST_TITLE_INPUT_EDIT,
     isEdit: true,
@@ -85,23 +59,98 @@ export const onShowMyListTitleInputEdit = (editId) => {
 };
 
 
-export const submitCreateMyListTitle = () => {
+export const createMyListTitle = () => {
   return (dispatch, getState) => {
     const title = getState().myPlayList.get('playListTitle');
-    return dispatch(createMyPlayList(title));
+    return dispatch(
+      webApiUtils.createMyPlayList({
+        type: CREATE_MY_PLAYLIST,
+        title,
+      }),
+    );
   };
 };
 
-export const submitUpdateMyListTitle = () => {
+export const updateMyListTitle = () => {
   return (dispatch, getState) => {
     const title = getState().myPlayList.get('playListTitle');
     const editId = getState().myPlayList.get('editId');
-    return dispatch(updateMyPlayList(title, editId));
+    return dispatch(
+      webApiUtils.updateMyPlayList({
+        type: UPDATE_MY_PLAYLIST_TITLE,
+        title,
+        editId,
+      }),
+    );
   };
 };
 
-export const submitDeleteMyListTitle = (id) => {
+export const deleteMyListTitle = (id) => {
   return (dispatch) => {
-    return dispatch(deleteMyPlayList(id));
+    return dispatch(
+      webApiUtils.deleteMyPlayList({
+        type: UPDATE_MY_PLAYLIST_TITLE,
+        id,
+      }),
+    );
+  };
+};
+
+
+export const showAddTrack = (editId) => {
+  return {
+    type: SHOW_ADD_TRACK,
+    editId,
+  };
+};
+
+export const addTrack = () => {
+  return (dispatch, getState) => {
+    const store = getState();
+    const trackId = store.myPlayList.get('editId');
+    const tracks = store.myPlayList.get('addTracks').toArray();
+
+    const videoIds = tracks.map((item) => {
+      return item.videoId;
+    });
+
+    const titles = tracks.map((item) => {
+      return item.title;
+    });
+
+    return dispatch(
+      webApiUtils.createTrack({
+        type: ADD_TRACK,
+        track_id: trackId,
+        video_ids: videoIds,
+        track_titles: titles,
+      }),
+    );
+  };
+};
+
+
+export const editTrack = () => {
+  return (dispatch, getState) => {
+    const store = getState();
+    const trackId = store.myPlayList.get('editId');
+    const tracks = store.myPlayList.get('editTracks').toArray();
+
+    const ids = tracks.map((item) => {
+      return item.ids;
+    });
+
+    const trackNums = tracks.map((item) => {
+      return item.trackNum;
+    });
+
+    return dispatch(
+      webApiUtils.createTrack({
+        type: EDIT_TRACK,
+        track_id: trackId,
+        ids,
+        track_nums: trackNums,
+      }),
+    );
   };
 };
