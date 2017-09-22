@@ -42,22 +42,29 @@ class TracksController < ApplicationController
     end
   end
 
-
-  def update
-    track = Track.find(params[:id])
-    if track.update(track_params)
+  def bulkEdit
+    tracks = Track.where(id: params[:ids])
+    bulkTracks = []
+    tracks.each_with_index do |item, idx|
+      item[:track_num] = params[:track_nums][idx];
+      bulkTracks << item
+    end
+    newTrack = Track.import bulkTracks, on_duplicate_key_update: [:track_num]
+    if newTrack
+      resTracks = Track.where(track_id: params[:track_id]).order('track_num ASC')
       render json: {
         :success => true,
-        :data => track
+        :data => resTracks
       }
     else
       render json: {
-        :error => track.errors.full_messages.as_json,
+        :error => newTrack.errors.full_messages.as_json,
         :success => false,
         :message => '編集に失敗しました'
       }
     end
   end
+
 
   def destroy
     track = Track.find(params[:id])

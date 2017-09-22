@@ -72,6 +72,12 @@ const myPlayList = (state = new MyPlayList(), action) => {
           .set('editId', action.editId);
       });
     }
+    case actions.SHOW_EDIT_TRACK: {
+      return state.withMutations((s) => {
+        s.set('isDisplayAddTrack', true)
+          .set('editId', action.editId);
+      });
+    }
 
     default:
       return state;

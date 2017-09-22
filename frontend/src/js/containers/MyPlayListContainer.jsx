@@ -54,9 +54,24 @@ class MyPlayListContainer extends React.Component {
     this.props.myPlayListActions.showAddTrack(id);
   }
 
+  onClickShowEditTrack(id, e) {
+    e.preventDefault();
+    this.props.myPlayListActions.showEditTrack(id);
+  }
+
   onSubmitAddTrack(e) {
     e.preventDefault();
     this.props.myPlayListActions.addTrack();
+  }
+
+  onSubmitEditTrack(e) {
+    e.preventDefault();
+    this.props.myPlayListActions.editTrack();
+  }
+
+  onSubmitDeleteTrack(id, e) {
+    e.preventDefault();
+    this.props.myPlayListActions.deleteTrack(id);
   }
 
   titleInputStyle() {
@@ -97,6 +112,11 @@ class MyPlayListContainer extends React.Component {
             href="#"
             onClick={this.onSubmitAddTrack}
           >曲の追加</a>
+          <br />
+          <a
+            href="#"
+            onClick={this.onSubmitEditTrack.bind(this)}
+          >曲の並び替え</a>
         </div>
 
 
@@ -119,6 +139,16 @@ class MyPlayListContainer extends React.Component {
                   href="#"
                   onClick={this.onClickShowAddTrack.bind(this, item.id)}
                 >曲の追加</a>
+                <br />
+                <a
+                  href="#"
+                  onClick={this.onClickShowEditTrack.bind(this, item.id)}
+                >曲の並べ替え</a>
+                <br />
+                <a
+                  href="#"
+                  onClick={this.onSubmitDeleteTrack.bind(this, 17)}
+                >曲の削除</a>
               </aritcle>
 
             );

@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   end
 
   resources :track_lists, only:[:index, :create, :update ,:destroy]
-  resources :tracks, only:[:show, :create, :update ,:destroy]
+  resources :tracks, only:[:show, :create, :destroy]
 
   # SPA（フロント側と対応する）のルーティング
   root 'spa#index'
   get '/my-play-list/', to: 'spa#index'
 
   # 個別APIのルーティング
-  get '/my-album', to: 'track_lists#myAlbum'
-  get '/my-edit-track', to: 'tracks#bulkEdit'
+  get '/my_album', to: 'track_lists#myAlbum'
+  put '/edit_tracks', to: 'tracks#bulkEdit'
 
 end

@@ -16,6 +16,7 @@ export const CHANGE_MY_LIST_TITLE = 'CHANGE_MY_LIST_TITLE';
 export const SHOW_MY_LIST_TITLE_INPUT = 'SHOW_MY_LIST_TITLE_INPUT';
 export const SHOW_MY_LIST_TITLE_INPUT_EDIT = 'SHOW_MY_LIST_TITLE_INPUT_EDIT';
 export const SHOW_ADD_TRACK = 'SHOW_ADD_TRACK';
+export const SHOW_EDIT_TRACK = 'SHOW_EDIT_TRACK';
 
 
 export const ADD_TRACK = 'ADD_TRACK';
@@ -25,6 +26,10 @@ export const ADD_TRACK_FAILURE = 'ADD_TRACK_FAILURE';
 export const EDIT_TRACK = 'EDIT_TRACK';
 export const EDIT_TRACK_SUCCESS = 'EDIT_TRACK_SUCCESS';
 export const EDIT_TRACK_FAILURE = 'EDIT_TRACK_FAILURE';
+
+export const DELETE_TRACK = 'DELETE_TRACK';
+export const DELETE_TRACK_SUCCESS = 'DELETE_TRACK_SUCCESS';
+export const DELETE_TRACK_FAILURE = 'DELETE_TRACK_FAILURE';
 
 
 export const getMyPlayList = () => {
@@ -104,6 +109,13 @@ export const showAddTrack = (editId) => {
   };
 };
 
+export const showEditTrack = (editId) => {
+  return {
+    type: SHOW_EDIT_TRACK,
+    editId,
+  };
+};
+
 export const addTrack = () => {
   return (dispatch, getState) => {
     const store = getState();
@@ -132,12 +144,14 @@ export const addTrack = () => {
 
 export const editTrack = () => {
   return (dispatch, getState) => {
+    // TODO ここでmodelのeditTracksを操作
+    // 順番の制御
     const store = getState();
     const trackId = store.myPlayList.get('editId');
     const tracks = store.myPlayList.get('editTracks').toArray();
 
     const ids = tracks.map((item) => {
-      return item.ids;
+      return item.id;
     });
 
     const trackNums = tracks.map((item) => {
@@ -145,12 +159,24 @@ export const editTrack = () => {
     });
 
     return dispatch(
-      webApiUtils.createTrack({
+      webApiUtils.updateTrack({
         type: EDIT_TRACK,
         track_id: trackId,
         ids,
         track_nums: trackNums,
       }),
     );
+  };
+};
+
+export const deleteTrack = (id) => {
+  return (dispatch, getState) => {
+    return dispatch(
+      webApiUtils.deleteTrack({
+        type: DELETE_TRACK,
+        id,
+      }),
+    );
+    // TODO 削除あとに順番を変更するために、ここでbulkEdit
   };
 };
