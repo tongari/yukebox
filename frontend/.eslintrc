@@ -20,7 +20,8 @@
     "jsx-a11y/href-no-hash": 0,
     "no-underscore-dangle": 0,
     "no-debugger": 1,
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "react/jsx-no-bind": 0
   },
   "env": {
     "browser": true,

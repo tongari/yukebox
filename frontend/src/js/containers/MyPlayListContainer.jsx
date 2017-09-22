@@ -4,68 +4,75 @@ import { connect } from 'react-redux';
 import * as myPlayListActions from './../actions/myPlayList';
 
 
-const titleInputStyle = (isDisplayTitleInput) => {
-  return {
-    display: (isDisplayTitleInput) ? 'block' : 'none',
-  };
-};
-
 /**
  * MyPlayListContainer
  */
 class MyPlayListContainer extends React.Component {
+  constructor() {
+    super();
+    this.onChangeMyListTitle = this.onChangeMyListTitle.bind(this);
+    this.onShowMyListTitleInput = this.onShowMyListTitleInput.bind(this);
+    this.onSubmitMyListTitle = this.onSubmitMyListTitle.bind(this);
+    this.onSubmitDeleteMyListTitle = this.onSubmitDeleteMyListTitle.bind(this);
+  }
+
   componentWillMount() {
     this.props.myPlayListActions.getMyPlayList();
   }
 
+  onChangeMyListTitle(e) {
+    this.props.myPlayListActions.changeMyListTitle(e.target.value);
+  }
+
+  onShowMyListTitleInput(e) {
+    e.preventDefault();
+    this.props.myPlayListActions.showMyListTitleInput();
+  }
+
+  onShowMyListTitleInputEdit(id, e) {
+    e.preventDefault();
+    this.props.myPlayListActions.onShowMyListTitleInputEdit(id);
+  }
+
+  onSubmitMyListTitle(e) {
+    e.preventDefault();
+    if (this.props.store.myPlayList.get('isEditTitle')) {
+      this.props.myPlayListActions.submitUpdateMyListTitle();
+    } else {
+      this.props.myPlayListActions.submitCreateMyListTitle();
+    }
+  }
+
+  onSubmitDeleteMyListTitle(id, e) {
+    e.preventDefault();
+    this.props.myPlayListActions.submitDeleteMyListTitle(id);
+  }
+
+  titleInputStyle() {
+    return {
+      display: (this.props.store.myPlayList.get('isDisplayTitleInput')) ? 'block' : 'none',
+    };
+  }
+
   render() {
+    const isEditTitle = this.props.store.myPlayList.get('isEditTitle');
     const playListTitle = this.props.store.myPlayList.get('playListTitle');
     const myPlayList = this.props.store.myPlayList.get('myPlayList');
-    const isDisplayTitleInput = this.props.store.myPlayList.get('isDisplayTitleInput');
-    const isEditTitle = this.props.store.myPlayList.get('isEditTitle');
-
-    const onChangeMyListTitle = this.props.myPlayListActions.onChangeMyListTitle;
-    const onShowMyListTitleInput = this.props.myPlayListActions.onShowMyListTitleInput;
-    const onShowMyListTitleInputEdit = this.props.myPlayListActions.onShowMyListTitleInputEdit;
-    const onSubmitMyListTitle = this.props.myPlayListActions.onSubmitMyListTitle;
-    const onSubmitUpdateMyList = this.props.myPlayListActions.onSubmitUpdateMyList;
-    const onSubmitDeleteMyList = this.props.myPlayListActions.onSubmitDeleteMyList;
 
     return (
       <div>
         <h1>マイプレイリスト</h1>
-
-        <a
-          href="#"
-          onClick={
-            (e) => {
-              e.preventDefault();
-              onShowMyListTitleInput(false);
-            }
-          }
-        >プレイリスト作成</a>
-
-        <div style={titleInputStyle(isDisplayTitleInput)}>
+        <a href="#" onClick={this.onShowMyListTitleInput}>プレイリスト作成</a>
+        <div style={this.titleInputStyle()}>
           <textarea
             maxLength={50}
             rows={2}
             cols={30}
             placeholder="title"
             value={playListTitle}
-            onChange={onChangeMyListTitle}
+            onChange={this.onChangeMyListTitle}
           />
-          <a
-            href="#"
-            onClick={
-              (e) => {
-                if (isEditTitle) {
-                  onSubmitUpdateMyList();
-                } else {
-                  onSubmitMyListTitle();
-                }
-              }
-            }
-          >{(isEditTitle) ? '編集' : '作成'}</a>
+          <a href="#" onClick={this.onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
         </div>
 
         {
@@ -75,22 +82,12 @@ class MyPlayListContainer extends React.Component {
                 <h2>{item.title}</h2>
                 <a
                   href="#"
-                  onClick={
-                    (e) => {
-                      e.preventDefault();
-                      onShowMyListTitleInputEdit(item.id);
-                    }
-                  }
+                  onClick={this.onShowMyListTitleInputEdit.bind(this, item.id)}
                 >プレイリスト名変更</a>
                 <br />
                 <a
                   href="#"
-                  onClick={
-                    (e) => {
-                      e.preventDefault();
-                      onSubmitDeleteMyList(item.id);
-                    }
-                  }
+                  onClick={this.onSubmitDeleteMyListTitle.bind(this, item.id)}
                 >プレイリスト削除</a>
               </aritcle>
 

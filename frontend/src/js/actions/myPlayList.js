@@ -63,14 +63,14 @@ export const getMyPlayList = () => {
 };
 
 
-export const onChangeMyListTitle = (e) => {
+export const changeMyListTitle = (title) => {
   return {
     type: CHANGE_MY_LIST_TITLE,
-    title: e.target.value,
+    title,
   };
 };
 
-export const onShowMyListTitleInput = () => {
+export const showMyListTitleInput = () => {
   return {
     type: SHOW_MY_LIST_TITLE_INPUT,
   };
@@ -85,14 +85,14 @@ export const onShowMyListTitleInputEdit = (editId) => {
 };
 
 
-export const onSubmitMyListTitle = () => {
+export const submitCreateMyListTitle = () => {
   return (dispatch, getState) => {
     const title = getState().myPlayList.get('playListTitle');
     return dispatch(createMyPlayList(title));
   };
 };
 
-export const onSubmitUpdateMyList = () => {
+export const submitUpdateMyListTitle = () => {
   return (dispatch, getState) => {
     const title = getState().myPlayList.get('playListTitle');
     const editId = getState().myPlayList.get('editId');
@@ -100,7 +100,7 @@ export const onSubmitUpdateMyList = () => {
   };
 };
 
-export const onSubmitDeleteMyList = (id) => {
+export const submitDeleteMyListTitle = (id) => {
   return (dispatch) => {
     return dispatch(deleteMyPlayList(id));
   };
