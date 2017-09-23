@@ -21,7 +21,10 @@ const fetch = (action, csrfToken = null) => {
         if (url === '/users/sign_out') resolve();
 
         const res = JSON.parse(xhr.response);
-        if (res.success) {
+
+        if (action.payload.request.externalApi) {
+          resolve(res);
+        } else if (res.success) {
           resolve(res);
         } else {
           window.alert(res.message);

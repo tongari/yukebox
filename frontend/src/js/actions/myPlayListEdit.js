@@ -16,6 +16,47 @@ export const DELETE_TRACK = 'DELETE_TRACK';
 export const DELETE_TRACK_SUCCESS = 'DELETE_TRACK_SUCCESS';
 export const DELETE_TRACK_FAILURE = 'DELETE_TRACK_FAILURE';
 
+export const SHOW_SEARCH_MODAL = 'SHOW_SEARCH_MODAL';
+export const HIDE_SEARCH_MODAL = 'HIDE_SEARCH_MODAL';
+export const CHANGE_KEYWORD = 'CHANGE_KEYWORD';
+
+export const SEARCH_VIDEO = 'SEARCH_VIDEO';
+export const SEARCH_VIDEO_SUCCESS = 'SEARCH_VIDEO_SUCCESS';
+export const SEARCH_VIDEO_FAILURE = 'SEARCH_VIDEO_FAILURE';
+
+export const showSearchModal = () => {
+  document.querySelector('body').style.overflow = 'hidden';
+  return ({
+    type: SHOW_SEARCH_MODAL,
+  });
+};
+
+export const hideSearchModal = () => {
+  document.querySelector('body').style.overflow = '';
+  return ({
+    type: HIDE_SEARCH_MODAL,
+  });
+};
+
+export const changeKeyword = (keyword) => {
+  return ({
+    type: CHANGE_KEYWORD,
+    keyword,
+  });
+};
+
+export const searchVideo = () => {
+  return (dispatch, getState) => {
+    const keyword = getState().myPlayListEdit.get('searchKeyword');
+    return dispatch(
+      webApiUtils.getYoutubeVideo({
+        type: SEARCH_VIDEO,
+        keyword,
+      }),
+    );
+  };
+};
+
 
 export const getSingleMyPlayList = (id) => {
   return (dispatch, getState) => {

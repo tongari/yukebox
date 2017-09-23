@@ -5,9 +5,10 @@
   display: inline-block;
   max-width: 100%;
   border-radius: 4px;
-  padding: $f-margin-S $f-margin-M;
+  padding: $f-margin-XS $f-margin-M;
   line-height: 1;
   text-align: center;
+  font-size: $f-font-size-S;
 }
 
 .c-btn {

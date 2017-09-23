@@ -5,6 +5,7 @@ import * as myPlayListEditActions from './../actions/myPlayListEdit';
 
 import MyListEditTool from '../components/MyListEditTool';
 import MyPlayListEditCell from '../components/MyListEditCell';
+import SearchVideoModal from '../components/SearchVideoModal';
 
 /**
  * MyPlayListEditContainer
@@ -16,13 +17,26 @@ class MyPlayListEditContainer extends React.Component {
 
   render() {
     const myPlayList = this.props.myPlayListEdit.get('myPlayList');
+    const isDisplaySearchModal = this.props.myPlayListEdit.get('isDisplaySearchModal');
+    const searchKeyword = this.props.myPlayListEdit.get('searchKeyword');
+    const searchVideoItems = this.props.myPlayListEdit.get('searchVideoItems');
     const myPlayListEditActions = this.props.myPlayListEditActions;
     return (
       <div>
-        <MyListEditTool />
+        <MyListEditTool
+          showSearchModal={myPlayListEditActions.showSearchModal}
+        />
         <MyPlayListEditCell
           myPlayList={myPlayList}
           deleteTrack={myPlayListEditActions.deleteTrack}
+        />
+        <SearchVideoModal
+          isDisplaySearchModal={isDisplaySearchModal}
+          searchKeyword={searchKeyword}
+          changeKeyword={myPlayListEditActions.changeKeyword}
+          searchVideo={myPlayListEditActions.searchVideo}
+          closeModal={myPlayListEditActions.hideSearchModal}
+          searchVideoItems={searchVideoItems}
         />
       </div>
     );

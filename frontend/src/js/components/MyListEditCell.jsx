@@ -12,7 +12,7 @@ const MyListEditCell = (props) => {
       {
         myPlayList.map((item) => {
           return (
-            <aritcle className="c-cell-thin" key={`myPlayListEdit_${item.id}`}>
+            <section className="c-cell-thin" key={`myPlayListEdit_${item.id}`}>
               <div className="p-myListCell__body">
                 <div>
                   <img src={`https://i.ytimg.com/vi/${item.video_id}/default.jpg`} width={60} alt="" />
@@ -53,7 +53,7 @@ const MyListEditCell = (props) => {
                   </li>
                 </ul>
               </div>
-            </aritcle>
+            </section>
           );
         })
       }
