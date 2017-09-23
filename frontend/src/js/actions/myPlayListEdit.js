@@ -70,26 +70,25 @@ export const getSingleMyPlayList = (id) => {
 };
 
 
-export const addTrack = () => {
+export const addTrack = (id, videoId, title) => {
   return (dispatch, getState) => {
-    const store = getState();
-    const trackId = store.myPlayList.get('editId');
-    const tracks = store.myPlayList.get('addTracks').toArray();
-
-    const videoIds = tracks.map((item) => {
-      return item.videoId;
-    });
-
-    const titles = tracks.map((item) => {
-      return item.title;
-    });
+    // 一括登録する場合
+    // const store = getState();
+    // const tracks = store.myPlayList.get('addTracks').toArray();
+    // const videoIds = tracks.map((item) => {
+    //   return item.videoId;
+    // });
+    //
+    // const titles = tracks.map((item) => {
+    //   return item.title;
+    // });
 
     return dispatch(
       webApiUtils.createTrack({
         type: ADD_TRACK,
-        track_id: trackId,
-        video_ids: videoIds,
-        track_titles: titles,
+        track_id: id,
+        video_ids: [videoId],
+        track_titles: [title],
       }),
     );
   };

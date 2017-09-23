@@ -4,6 +4,8 @@ import React from 'react';
 const SearchResult = (props) => {
   const {
     searchVideoItems,
+    addTrack,
+    urlId,
   } = props;
 
   return (
@@ -24,6 +26,12 @@ const SearchResult = (props) => {
                     <a
                       className="p-myListCell__addTrack"
                       href="#"
+                      onClick={
+                        (e) => {
+                          e.preventDefault();
+                          addTrack(urlId, item.id.videoId, item.snippet.title);
+                        }
+                      }
                     >&nbsp;</a>
                   </li>
                 </ul>

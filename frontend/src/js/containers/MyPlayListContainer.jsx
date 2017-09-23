@@ -16,7 +16,6 @@ class MyPlayListContainer extends React.Component {
     this.onClickMyListTitleInput = this.onClickMyListTitleInput.bind(this);
     this.onClickAddListModal = this.onClickAddListModal.bind(this);
     this.onSubmitMyListTitle = this.onSubmitMyListTitle.bind(this);
-    this.onSubmitAddTrack = this.onSubmitAddTrack.bind(this);
   }
 
   componentWillMount() {
@@ -46,21 +45,6 @@ class MyPlayListContainer extends React.Component {
     }
   }
 
-  onSubmitAddTrack(e) {
-    e.preventDefault();
-    this.props.myPlayListActions.addTrack();
-  }
-
-  onSubmitEditTrack(e) {
-    e.preventDefault();
-    this.props.myPlayListActions.editTrack();
-  }
-
-  addTrackStyle() {
-    return {
-      display: (this.props.store.myPlayList.get('isDisplayAddTrack')) ? 'block' : 'none',
-    };
-  }
 
   render() {
     const isDisplayTitleInput = this.props.store.myPlayList.get('isDisplayTitleInput');
@@ -80,18 +64,6 @@ class MyPlayListContainer extends React.Component {
               className="p-myPlayList__addListBtn"
               onClick={this.onClickMyListTitleInput}
             >プレイリスト作成</a>
-          </div>
-
-          <div style={this.addTrackStyle()}>
-            <a
-              href="#"
-              onClick={this.onSubmitAddTrack}
-            >曲の追加</a>
-            <br />
-            <a
-              href="#"
-              onClick={this.onSubmitEditTrack.bind(this)}
-            >曲の並び替え</a>
           </div>
 
           <MyListCell

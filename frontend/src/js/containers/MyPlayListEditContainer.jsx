@@ -36,7 +36,9 @@ class MyPlayListEditContainer extends React.Component {
           changeKeyword={myPlayListEditActions.changeKeyword}
           searchVideo={myPlayListEditActions.searchVideo}
           closeModal={myPlayListEditActions.hideSearchModal}
+          addTrack={myPlayListEditActions.addTrack}
           searchVideoItems={searchVideoItems}
+          urlId={this.props.match.params.id}
         />
       </div>
     );

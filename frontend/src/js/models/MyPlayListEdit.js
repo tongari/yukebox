@@ -6,16 +6,7 @@ export default class MyPlayListEdit extends Immutable.Record({
   searchKeyword: '',
   searchVideoItems: Immutable.List([]),
   myPlayList: Immutable.List([]),
-  addTracks: Immutable.List([
-    {
-      videoId: 'YapsFDcGe_s',
-      title: 'スピッツ楓',
-    },
-    {
-      videoId: '51CH3dPaWXc',
-      title: 'スピッツ / ロビンソン',
-    },
-  ]),
+  // addTracks: Immutable.List([]),
   editTracks: Immutable.List([
     {
       id: 16,

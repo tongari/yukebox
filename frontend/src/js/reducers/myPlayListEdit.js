@@ -43,6 +43,19 @@ const myPlayListEdit = (state = new MyPlayListEdit(), action) => {
       return state.set('isFetching', false);
     }
 
+    case actions.ADD_TRACK: {
+      return state.set('isDisplaySearchModal', true);
+    }
+    case actions.ADD_TRACK_SUCCESS: {
+      return state.withMutations((s) => {
+        s.set('myPlayList', action.response.data)
+          .set('isFetching', false);
+      });
+    }
+    case actions.ADD_TRACK_FAILURE: {
+      return state.set('isFetching', false);
+    }
+
     default:
       return state;
   }
