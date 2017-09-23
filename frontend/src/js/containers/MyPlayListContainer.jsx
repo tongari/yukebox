@@ -75,7 +75,11 @@ class MyPlayListContainer extends React.Component {
         <div className="p-myPlayList">
           <h1 className="p-myPlayList__title">マイプレイリスト</h1>
           <div className="p-myPlayList__addList">
-            <a href="#" className="p-myPlayList__addListBtn" onClick={this.onClickMyListTitleInput}>プレイリスト作成</a>
+            <a
+              href="#"
+              className="p-myPlayList__addListBtn"
+              onClick={this.onClickMyListTitleInput}
+            >プレイリスト作成</a>
           </div>
 
           <div style={this.addTrackStyle()}>
@@ -92,11 +96,7 @@ class MyPlayListContainer extends React.Component {
 
           <MyListCell
             myPlayList={myPlayList}
-            showMyListTitleInputEdit={myPlayListActions.showMyListTitleInputEdit}
             deleteMyListTitle={myPlayListActions.deleteMyListTitle}
-            showAddTrack={myPlayListActions.showAddTrack}
-            showEditTrack={myPlayListActions.showEditTrack}
-            deleteTrack={myPlayListActions.deleteTrack}
           />
         </div>
         <AddListModal

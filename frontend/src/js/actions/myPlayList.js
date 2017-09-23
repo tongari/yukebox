@@ -24,19 +24,6 @@ export const SHOW_ADD_TRACK = 'SHOW_ADD_TRACK';
 export const SHOW_EDIT_TRACK = 'SHOW_EDIT_TRACK';
 
 
-export const ADD_TRACK = 'ADD_TRACK';
-export const ADD_TRACK_SUCCESS = 'ADD_TRACK_SUCCESS';
-export const ADD_TRACK_FAILURE = 'ADD_TRACK_FAILURE';
-
-export const EDIT_TRACK = 'EDIT_TRACK';
-export const EDIT_TRACK_SUCCESS = 'EDIT_TRACK_SUCCESS';
-export const EDIT_TRACK_FAILURE = 'EDIT_TRACK_FAILURE';
-
-export const DELETE_TRACK = 'DELETE_TRACK';
-export const DELETE_TRACK_SUCCESS = 'DELETE_TRACK_SUCCESS';
-export const DELETE_TRACK_FAILURE = 'DELETE_TRACK_FAILURE';
-
-
 export const getMyPlayList = () => {
   return (dispatch) => {
     return dispatch(
@@ -124,70 +111,5 @@ export const showEditTrack = (editId) => {
   return {
     type: SHOW_EDIT_TRACK,
     editId,
-  };
-};
-
-export const addTrack = () => {
-  return (dispatch, getState) => {
-    const store = getState();
-    const trackId = store.myPlayList.get('editId');
-    const tracks = store.myPlayList.get('addTracks').toArray();
-
-    const videoIds = tracks.map((item) => {
-      return item.videoId;
-    });
-
-    const titles = tracks.map((item) => {
-      return item.title;
-    });
-
-    return dispatch(
-      webApiUtils.createTrack({
-        type: ADD_TRACK,
-        track_id: trackId,
-        video_ids: videoIds,
-        track_titles: titles,
-      }),
-    );
-  };
-};
-
-
-export const editTrack = () => {
-  return (dispatch, getState) => {
-    // TODO ここでmodelのeditTracksを操作
-    // 順番の制御
-    const store = getState();
-    const trackId = store.myPlayList.get('editId');
-    const tracks = store.myPlayList.get('editTracks').toArray();
-
-    const ids = tracks.map((item) => {
-      return item.id;
-    });
-
-    const trackNums = tracks.map((item) => {
-      return item.trackNum;
-    });
-
-    return dispatch(
-      webApiUtils.updateTrack({
-        type: EDIT_TRACK,
-        track_id: trackId,
-        ids,
-        track_nums: trackNums,
-      }),
-    );
-  };
-};
-
-export const deleteTrack = (id) => {
-  return (dispatch, getState) => {
-    return dispatch(
-      webApiUtils.deleteTrack({
-        type: DELETE_TRACK,
-        id,
-      }),
-    );
-    // TODO 削除あとに順番を変更するために、ここでbulkEdit
   };
 };

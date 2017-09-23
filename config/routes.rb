@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # SPA（フロント側と対応する）のルーティング
   root 'spa#index'
   get '/my-play-list/', to: 'spa#index'
+  get '/my-play-list-edit/:id', to: 'spa#index'
 
   # 個別APIのルーティング
   get '/my_album', to: 'track_lists#myAlbum'

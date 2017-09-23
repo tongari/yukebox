@@ -8,6 +8,7 @@ import configStore from './store/configStore';
 import AppContainer from './containers/AppContainer';
 import PlayListContainer from './containers/PlayListContainer';
 import MyPlayListContainer from './containers/MyPlayListContainer';
+import MyPlayListEditContainer from './containers/MyPlayListEditContainer';
 
 const store = configStore();
 
@@ -19,6 +20,7 @@ ReactDOM.render(
         <div className="p-container">
           <Route exact path="/" component={PlayListContainer} />
           <Route path={routerPath.MY_PLAY_LIST} component={MyPlayListContainer} />
+          <Route path={`${routerPath.MY_PLAY_LIST_EDIT}/:id`} component={MyPlayListEditContainer} />
         </div>
       </div>
     </BrowserRouter>

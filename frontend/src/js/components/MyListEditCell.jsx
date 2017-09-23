@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import routerPath from '../config/router';
 
-const MyListCell = (props) => {
+
+const MyListEditCell = (props) => {
   const {
     myPlayList,
-    deleteMyListTitle,
+    deleteTrack,
   } = props;
 
   return (
@@ -13,12 +12,13 @@ const MyListCell = (props) => {
       {
         myPlayList.map((item) => {
           return (
-            <section className="c-cell" key={`myPlayList_${item.id}`}>
-
+            <aritcle className="c-cell-thin" key={`myPlayListEdit_${item.id}`}>
               <div className="p-myListCell__body">
                 <div>
-                  <h2 className="p-myListCell__title u-space-b-XS">{item.title}</h2>
-                  <img src="https://i.ytimg.com/vi/43D_nBGfuGY/mqdefault.jpg" alt="" />
+                  <img src={`https://i.ytimg.com/vi/${item.video_id}/default.jpg`} width={60} alt="" />
+                  <div className="p-myListCell__editText">
+                    <h2 className="p-myListCell__title -edit">{item.track_title}</h2>
+                  </div>
                 </div>
                 <ul className="p-myListCell__tool">
                   <li>
@@ -28,11 +28,16 @@ const MyListCell = (props) => {
                     >&nbsp;</a>
                   </li>
                   <li>
-                    <Link
-                      to={`${routerPath.MY_PLAY_LIST_EDIT}/${item.id}`}
-                      className="p-myListCell__edit"
+                    <a
+                      className="p-myListCell__up"
                       href="#"
-                    >&nbsp;</Link>
+                    >&nbsp;</a>
+                  </li>
+                  <li>
+                    <a
+                      className="p-myListCell__down"
+                      href="#"
+                    >&nbsp;</a>
                   </li>
                   <li>
                     <a
@@ -41,14 +46,14 @@ const MyListCell = (props) => {
                       onClick={
                         (e) => {
                           e.preventDefault();
-                          deleteMyListTitle(item.id);
+                          deleteTrack(item.id);
                         }
                       }
                     >&nbsp;</a>
                   </li>
                 </ul>
               </div>
-            </section>
+            </aritcle>
           );
         })
       }
@@ -56,4 +61,4 @@ const MyListCell = (props) => {
   );
 };
 
-export default MyListCell;
+export default MyListEditCell;
