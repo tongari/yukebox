@@ -1,0 +1,41 @@
+@import "./config.scss";
+
+html{
+  font-size: 62.5%;
+}
+
+body{
+  font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',"メイリオ", Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  font-size: $f-font-size-M;
+  text-size-adjust: 100%;
+  line-height: $f-line-height-M;
+  color: $f-text-color;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+li,ol{
+  list-style: none;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $f-text-color;
+}
+
+*{
+  box-sizing: border-box;
+}

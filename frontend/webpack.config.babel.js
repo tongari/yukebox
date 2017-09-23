@@ -1,6 +1,8 @@
 import webpack from 'webpack';
 import path from 'path';
 import WebpackBuildNotifierPlugin from 'webpack-build-notifier';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
 const PATH = {
   src: './src',
@@ -57,4 +59,54 @@ const jsConfig = ((env)=> {
 })(process.env.NODE_ENV);
 
 
-module.exports = [jsConfig];
+/**
+ * css compile
+ * @type {{entry, output, module, plugins, postcss}}
+ */
+const cssConfig = ((env)=>{
+  const entry = {
+    style: path.join(__dirname, `${PATH.src}/css/style.scss`),
+  };
+  const output = {
+    path: path.join(__dirname, `${PATH.dist}/stylesheets/`),
+    filename: '[name].css',
+  };
+
+  const module = {
+    rules: [{
+      test: /\.scss$/,
+      exclude: /node_modules/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: ["css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer]
+            }
+          },
+          "sass-loader"
+        ]
+      })
+    }]
+  };
+
+  const plugins = [
+    new ExtractTextPlugin('[name].css'),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [
+          autoprefixer({ browsers: ['last 2 versions', 'Android >= 4.1'] }),
+        ]
+      }
+    }),
+    new WebpackBuildNotifierPlugin()
+  ];
+
+  return {entry, output, module, plugins}
+})(process.env.NODE_ENV);
+
+
+
+module.exports = [jsConfig, cssConfig];
+

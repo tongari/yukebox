@@ -2,6 +2,7 @@ import * as webApiUtils from '../webApiUtils/app';
 
 export const LOGOUT = 'LOGOUT';
 export const SET_CSRF_TOKEN = 'APP_SET_CSRF_TOKEN';
+export const CHANGE_DISPLAY_HEADER_TOOL = 'CHANGE_DISPLAY_HEADER_TOOL';
 
 /**
  * cstfトークンを保持
@@ -29,5 +30,11 @@ export const logout = () => {
         type: LOGOUT,
       }),
     );
+  };
+};
+
+export const changeDisplayHeaderTool = () => {
+  return {
+    type: CHANGE_DISPLAY_HEADER_TOOL,
   };
 };

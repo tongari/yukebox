@@ -18,3 +18,5 @@ public/uploads/
 frontend/node_modules/
 app/assets/javascripts/app.js
 app/assets/javascripts/app.js.map
+app/assets/stylesheets/style.css
+app/assets/stylesheets/style.css.map

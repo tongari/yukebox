@@ -16,8 +16,10 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <AppContainer />
-        <Route exact path="/" component={PlayListContainer} />
-        <Route path={routerPath.MY_PLAY_LIST} component={MyPlayListContainer} />
+        <div className="p-container">
+          <Route exact path="/" component={PlayListContainer} />
+          <Route path={routerPath.MY_PLAY_LIST} component={MyPlayListContainer} />
+        </div>
       </div>
     </BrowserRouter>
   </Provider>,
