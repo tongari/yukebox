@@ -12,8 +12,13 @@ export const UPDATE_MY_PLAYLIST_TITLE = 'UPDATE_MY_PLAYLIST_TITLE';
 export const UPDATE_MY_PLAYLIST_TITLE_SUCCESS = 'UPDATE_MY_PLAYLIST_TITLE_SUCCESS';
 export const UPDATE_MY_PLAYLIST_TITLE_FAILURE = 'UPDATE_MY_PLAYLIST_TITLE_FAILURE';
 
+export const DELETE_MY_PLAYLIST = 'DELETE_MY_PLAYLIST';
+export const DELETE_MY_PLAYLIST_SUCCESS = 'DELETE_MY_PLAYLIST_SUCCESS';
+export const DELETE_MY_PLAYLIST_FAILURE = 'DELETE_MY_PLAYLIST_FAILURE';
+
 export const CHANGE_MY_LIST_TITLE = 'CHANGE_MY_LIST_TITLE';
 export const SHOW_MY_LIST_TITLE_INPUT = 'SHOW_MY_LIST_TITLE_INPUT';
+export const HIDE_MY_LIST_TITLE_INPUT = 'HIDE_MY_LIST_TITLE_INPUT';
 export const SHOW_MY_LIST_TITLE_INPUT_EDIT = 'SHOW_MY_LIST_TITLE_INPUT_EDIT';
 export const SHOW_ADD_TRACK = 'SHOW_ADD_TRACK';
 export const SHOW_EDIT_TRACK = 'SHOW_EDIT_TRACK';
@@ -52,6 +57,12 @@ export const changeMyListTitle = (title) => {
 export const showMyListTitleInput = () => {
   return {
     type: SHOW_MY_LIST_TITLE_INPUT,
+  };
+};
+
+export const hideMyListTitleInput = () => {
+  return {
+    type: HIDE_MY_LIST_TITLE_INPUT,
   };
 };
 
@@ -94,7 +105,7 @@ export const deleteMyListTitle = (id) => {
   return (dispatch) => {
     return dispatch(
       webApiUtils.deleteMyPlayList({
-        type: UPDATE_MY_PLAYLIST_TITLE,
+        type: DELETE_MY_PLAYLIST,
         id,
       }),
     );

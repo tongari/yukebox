@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as myPlayListActions from './../actions/myPlayList';
 
+import AddListModal from '../components/AddListModal';
+import MyListCell from '../components/MyListCell';
 
 /**
  * MyPlayListContainer
@@ -12,8 +14,8 @@ class MyPlayListContainer extends React.Component {
     super();
     this.onChangeMyListTitle = this.onChangeMyListTitle.bind(this);
     this.onClickMyListTitleInput = this.onClickMyListTitleInput.bind(this);
+    this.onClickAddListModal = this.onClickAddListModal.bind(this);
     this.onSubmitMyListTitle = this.onSubmitMyListTitle.bind(this);
-    this.onSubmitDeleteMyListTitle = this.onSubmitDeleteMyListTitle.bind(this);
     this.onSubmitAddTrack = this.onSubmitAddTrack.bind(this);
   }
 
@@ -30,9 +32,9 @@ class MyPlayListContainer extends React.Component {
     this.props.myPlayListActions.showMyListTitleInput();
   }
 
-  onClickMyListTitleInputEdit(id, e) {
+  onClickAddListModal(e) {
     e.preventDefault();
-    this.props.myPlayListActions.showMyListTitleInputEdit(id);
+    this.props.myPlayListActions.hideMyListTitleInput();
   }
 
   onSubmitMyListTitle(e) {
@@ -42,21 +44,6 @@ class MyPlayListContainer extends React.Component {
     } else {
       this.props.myPlayListActions.createMyListTitle();
     }
-  }
-
-  onSubmitDeleteMyListTitle(id, e) {
-    e.preventDefault();
-    this.props.myPlayListActions.deleteMyListTitle(id);
-  }
-
-  onClickShowAddTrack(id, e) {
-    e.preventDefault();
-    this.props.myPlayListActions.showAddTrack(id);
-  }
-
-  onClickShowEditTrack(id, e) {
-    e.preventDefault();
-    this.props.myPlayListActions.showEditTrack(id);
   }
 
   onSubmitAddTrack(e) {
@@ -69,17 +56,6 @@ class MyPlayListContainer extends React.Component {
     this.props.myPlayListActions.editTrack();
   }
 
-  onSubmitDeleteTrack(id, e) {
-    e.preventDefault();
-    this.props.myPlayListActions.deleteTrack(id);
-  }
-
-  titleInputStyle() {
-    return {
-      display: (this.props.store.myPlayList.get('isDisplayTitleInput')) ? 'block' : 'none',
-    };
-  }
-
   addTrackStyle() {
     return {
       display: (this.props.store.myPlayList.get('isDisplayAddTrack')) ? 'block' : 'none',
@@ -87,73 +63,50 @@ class MyPlayListContainer extends React.Component {
   }
 
   render() {
+    const isDisplayTitleInput = this.props.store.myPlayList.get('isDisplayTitleInput');
     const isEditTitle = this.props.store.myPlayList.get('isEditTitle');
     const playListTitle = this.props.store.myPlayList.get('playListTitle');
     const myPlayList = this.props.store.myPlayList.get('myPlayList');
 
+    const { myPlayListActions } = this.props;
+
     return (
       <div>
-        <h1>マイプレイリスト</h1>
-        <a href="#" onClick={this.onClickMyListTitleInput}>プレイリスト作成</a>
-        <div style={this.titleInputStyle()}>
-          <textarea
-            maxLength={50}
-            rows={2}
-            cols={30}
-            placeholder="title"
-            value={playListTitle}
-            onChange={this.onChangeMyListTitle}
+        <div className="p-myPlayList">
+          <h1 className="p-myPlayList__title">マイプレイリスト</h1>
+          <div className="p-myPlayList__addList">
+            <a href="#" className="p-myPlayList__addListBtn" onClick={this.onClickMyListTitleInput}>プレイリスト作成</a>
+          </div>
+
+          <div style={this.addTrackStyle()}>
+            <a
+              href="#"
+              onClick={this.onSubmitAddTrack}
+            >曲の追加</a>
+            <br />
+            <a
+              href="#"
+              onClick={this.onSubmitEditTrack.bind(this)}
+            >曲の並び替え</a>
+          </div>
+
+          <MyListCell
+            myPlayList={myPlayList}
+            showMyListTitleInputEdit={myPlayListActions.showMyListTitleInputEdit}
+            deleteMyListTitle={myPlayListActions.deleteMyListTitle}
+            showAddTrack={myPlayListActions.showAddTrack}
+            showEditTrack={myPlayListActions.showEditTrack}
+            deleteTrack={myPlayListActions.deleteTrack}
           />
-          <a href="#" onClick={this.onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
         </div>
-
-        <div style={this.addTrackStyle()}>
-          <a
-            href="#"
-            onClick={this.onSubmitAddTrack}
-          >曲の追加</a>
-          <br />
-          <a
-            href="#"
-            onClick={this.onSubmitEditTrack.bind(this)}
-          >曲の並び替え</a>
-        </div>
-
-
-        {
-          myPlayList.map((item) => {
-            return (
-              <aritcle key={`myPlayList_${item.id}`}>
-                <h2>{item.title}</h2>
-                <a
-                  href="#"
-                  onClick={this.onClickMyListTitleInputEdit.bind(this, item.id)}
-                >プレイリスト名変更</a>
-                <br />
-                <a
-                  href="#"
-                  onClick={this.onSubmitDeleteMyListTitle.bind(this, item.id)}
-                >プレイリスト削除</a>
-                <br />
-                <a
-                  href="#"
-                  onClick={this.onClickShowAddTrack.bind(this, item.id)}
-                >曲の追加</a>
-                <br />
-                <a
-                  href="#"
-                  onClick={this.onClickShowEditTrack.bind(this, item.id)}
-                >曲の並べ替え</a>
-                <br />
-                <a
-                  href="#"
-                  onClick={this.onSubmitDeleteTrack.bind(this, 17)}
-                >曲の削除</a>
-              </aritcle>
-
-            );
-          })
-        }
+        <AddListModal
+          playListTitle={playListTitle}
+          isDisplayTitleInput={isDisplayTitleInput}
+          isEditTitle={isEditTitle}
+          onChangeMyListTitle={this.onChangeMyListTitle}
+          onSubmitMyListTitle={this.onSubmitMyListTitle}
+          onClickAddListModal={this.onClickAddListModal}
+        />
       </div>
     );
   }

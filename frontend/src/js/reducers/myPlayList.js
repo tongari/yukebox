@@ -49,6 +49,18 @@ const myPlayList = (state = new MyPlayList(), action) => {
     case actions.UPDATE_MY_PLAYLIST_TITLE_FAILURE: {
       return state.set('isFetching', false);
     }
+    case actions.DELETE_MY_PLAYLIST: {
+      return state.set('isFetching', true);
+    }
+    case actions.DELETE_MY_PLAYLIST_SUCCESS: {
+      return state.withMutations((s) => {
+        s.set('myPlayList', action.response.data)
+          .set('isFetching', false);
+      });
+    }
+    case actions.DELETE_MY_PLAYLIST_FAILURE: {
+      return state.set('isFetching', false);
+    }
 
     case actions.CHANGE_MY_LIST_TITLE: {
       return state.set('playListTitle', action.title);
@@ -56,6 +68,12 @@ const myPlayList = (state = new MyPlayList(), action) => {
     case actions.SHOW_MY_LIST_TITLE_INPUT: {
       return state.withMutations((s) => {
         s.set('isDisplayTitleInput', true)
+          .set('isEditTitle', false);
+      });
+    }
+    case actions.HIDE_MY_LIST_TITLE_INPUT: {
+      return state.withMutations((s) => {
+        s.set('isDisplayTitleInput', false)
           .set('isEditTitle', false);
       });
     }

@@ -1,0 +1,28 @@
+@import "../foundation/config";
+
+@mixin btnBase(){
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 4px;
+  padding: $f-margin-S $f-margin-M;
+  line-height: 1;
+  text-align: center;
+}
+
+.c-btn {
+  &-default {
+    @include btnBase();
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+  }
+
+  &-primary {
+    @include btnBase();
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+  }
+
+}
