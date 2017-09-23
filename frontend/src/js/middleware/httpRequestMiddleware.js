@@ -17,6 +17,9 @@ const fetch = (action, csrfToken = null) => {
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status < 400) {
+        // ログアウトはRailsのDeviseを使ってるためJSON返却形式が違うのでここでハードコート処理
+        if (url === '/users/sign_out') resolve();
+
         const res = JSON.parse(xhr.response);
         if (res.success) {
           resolve(res);

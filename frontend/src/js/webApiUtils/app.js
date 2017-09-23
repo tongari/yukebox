@@ -1,15 +1,15 @@
 /**
- * プレイリストを取得
+ * ログアウト
  * @param type
  * @returns {{type: *, payload: {request: {method: string, url: string}}}}
  */
-export const getPlayList = ({ type }) => {
+export const logout = ({ type }) => {
   return ({
     type,
     payload: {
       request: {
-        method: 'get',
-        url: '/track_lists',
+        method: 'delete',
+        url: '/users/sign_out',
       },
     },
   });
