@@ -131,12 +131,13 @@ export const editTrack = (id, track_num, isUp, track_id, idx) => {
   };
 };
 
-export const deleteTrack = (id) => {
+export const deleteTrack = (id, track_id) => {
   return (dispatch, getState) => {
     return dispatch(
       webApiUtils.deleteTrack({
         type: DELETE_TRACK,
         id,
+        track_id,
       }),
     );
     // TODO 削除あとに順番を変更するために、ここでbulkEdit

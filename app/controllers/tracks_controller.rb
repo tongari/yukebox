@@ -13,6 +13,7 @@ class TracksController < ApplicationController
     if(tracks.count === 10)
       render json: {
         :success => false,
+        :data => tracks,
         :message => '１つのアルバムには10件以上は登録できません！'
       }
     else
@@ -69,9 +70,28 @@ class TracksController < ApplicationController
   def destroy
     track = Track.find(params[:id])
     if track.destroy
-      render json: {
-        :success => true
-      }
+
+      tracks = Track.where(track_id: params[:track_id]).order('track_num ASC')
+      bulkTracks = []
+      tracks.each_with_index do |item, idx|
+        item[:track_num] = idx+1;
+        bulkTracks << item
+      end
+      newTrack = Track.import bulkTracks, on_duplicate_key_update: [:track_num]
+
+      if newTrack
+        resTracks = Track.where(track_id: params[:track_id]).order('track_num ASC')
+        render json: {
+          :success => true,
+          :data => resTracks
+        }
+      else
+        render json: {
+          :error => newTrack.errors.full_messages.as_json,
+          :success => false,
+          :message => '削除に失敗しました'
+        }
+      end
     else
       render json: {
         :error => track.errors.full_messages.as_json,

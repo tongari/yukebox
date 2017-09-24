@@ -30,6 +30,7 @@ class MyPlayListEditContainer extends React.Component {
           myPlayList={myPlayList}
           editTrack={myPlayListEditActions.editTrack}
           deleteTrack={myPlayListEditActions.deleteTrack}
+          urlId={this.props.match.params.id}
         />
         <SearchVideoModal
           isDisplaySearchModal={isDisplaySearchModal}

@@ -73,13 +73,16 @@ export const updateTrack = ({ type, track_id, ids, track_nums }) => {
  * @param id
  * @returns {{type: *, payload: {request: {method: string, url: string}}}}
  */
-export const deleteTrack = ({ type, id }) => {
+export const deleteTrack = ({ type, id, track_id }) => {
   return ({
     type,
     payload: {
       request: {
         method: 'delete',
         url: `/tracks/${id}`,
+        params: {
+          track_id
+        }
       },
     },
   });

@@ -21,6 +21,7 @@ const MyListEditCell = (props) => {
     myPlayList,
     editTrack,
     deleteTrack,
+    urlId,
   } = props;
 
   return (
@@ -64,7 +65,7 @@ const MyListEditCell = (props) => {
                       onClick={
                         (e) => {
                           e.preventDefault();
-                          deleteTrack(item.id);
+                          deleteTrack(item.id, urlId);
                         }
                       }
                     >&nbsp;</a>
