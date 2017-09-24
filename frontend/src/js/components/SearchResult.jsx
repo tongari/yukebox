@@ -1,11 +1,25 @@
 import React from 'react';
 
+const addOrCheckedIcon = (videoId, myPlayList) => {
+  let isChecked = false;
+  for(let i = 0; i < myPlayList.length; i++){
+    if (myPlayList[i].video_id === videoId) {
+      isChecked = true;
+      break;
+    }
+  }
+  return {
+    style : isChecked ? 'p-myListCell__checked' : 'p-myListCell__addTrack',
+    isEnabled : isChecked ? false : true,
+  }
+};
 
 const SearchResult = (props) => {
   const {
     searchVideoItems,
     addTrack,
     urlId,
+    myPlayList,
   } = props;
 
   return (
@@ -24,12 +38,14 @@ const SearchResult = (props) => {
                 <ul className="p-myListCell__tool">
                   <li>
                     <a
-                      className="p-myListCell__addTrack"
+                      className={addOrCheckedIcon(item.id.videoId, myPlayList).style}
                       href="#"
                       onClick={
                         (e) => {
                           e.preventDefault();
-                          addTrack(urlId, item.id.videoId, item.snippet.title);
+                          if(addOrCheckedIcon(item.id.videoId, myPlayList).isEnabled){
+                            addTrack(urlId, item.id.videoId, item.snippet.title);
+                          }
                         }
                       }
                     >&nbsp;</a>

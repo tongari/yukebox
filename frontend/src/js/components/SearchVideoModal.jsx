@@ -18,6 +18,7 @@ const SearchVideoModal = (props) => {
     searchVideoItems,
     addTrack,
     urlId,
+    myPlayList,
   } = props;
 
   return (
@@ -34,6 +35,7 @@ const SearchVideoModal = (props) => {
           searchVideoItems={searchVideoItems}
           addTrack={addTrack}
           urlId={urlId}
+          myPlayList={myPlayList}
         />
       </div>
 

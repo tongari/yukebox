@@ -41,6 +41,7 @@ class MyPlayListEditContainer extends React.Component {
           addTrack={myPlayListEditActions.addTrack}
           searchVideoItems={searchVideoItems}
           urlId={this.props.match.params.id}
+          myPlayList={myPlayList}
         />
       </div>
     );
