@@ -75,8 +75,8 @@ class TrackListsController < ApplicationController
   end
 
   def destroy
-    trackList = TrackList.find(params[:id])
-    if trackList.destroy
+    @trackList = TrackList.find(params[:id])
+    if @trackList.destroy
       album = TrackList.where(user_id: current_user.id).order('id ASC')
       render json: {
         :success => true,
@@ -84,7 +84,7 @@ class TrackListsController < ApplicationController
       }
     else
       render json: {
-        :error => trackList.errors.full_messages.as_json,
+        :error => @trackList.errors.full_messages.as_json,
         :success => false,
         :message => '削除に失敗しました'
       }

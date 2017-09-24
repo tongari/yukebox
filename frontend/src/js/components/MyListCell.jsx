@@ -18,7 +18,7 @@ const MyListCell = (props) => {
               <div className="p-myListCell__body">
                 <div>
                   <h2 className="p-myListCell__title u-space-b-XS">{item.title}</h2>
-                  <img src="https://i.ytimg.com/vi/43D_nBGfuGY/mqdefault.jpg" alt="" />
+                  <img src="https://i.ytimg.com/vi/43D_nBGfuGY/mqdefault.jpg" width={320} alt="" />
                 </div>
                 <ul className="p-myListCell__tool">
                   <li>
