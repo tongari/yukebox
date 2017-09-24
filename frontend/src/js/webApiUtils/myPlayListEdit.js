@@ -95,8 +95,8 @@ export const getYoutubeVideo = ({ type, keyword }) => {
     payload: {
       request: {
         method: 'get',
-        externalApi: true,
         url: `https://www.googleapis.com/youtube/v3/search?key=AIzaSyCfKZCtDjM5Y4Yq-rOQzDNaUmSK-uqCF4s&part=snippet&type=video&maxResults=50&q=${keyword}`,
+        externalApi: true,
       },
     },
   });

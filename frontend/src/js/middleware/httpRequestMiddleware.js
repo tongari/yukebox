@@ -1,28 +1,23 @@
 /**
  * fetch
- * @param action
- * @param csrfToken
- * @param next
- * @param dispatch
- */
+*/
 const fetch = (action, csrfToken = null) => {
-  return new Promise((resolve, reject) => {
-    const method = action.payload.request.method;
-    const url = action.payload.request.url;
 
+  return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
+    xhr.open(action.payload.request.method, action.payload.request.url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    if (method.toUpperCase() !== 'GET') xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+    if (action.payload.request.method.toUpperCase() !== 'GET') xhr.setRequestHeader('X-CSRF-Token', csrfToken);
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status < 400) {
         // ログアウトはRailsのDeviseを使ってるためJSON返却形式が違うのでここでハードコート処理
-        if (url === '/users/sign_out') resolve();
+        if (action.payload.request.url === '/users/sign_out') resolve();
 
         const res = JSON.parse(xhr.response);
 
         if (action.payload.request.externalApi) {
+          res.success = true;
           resolve(res);
         } else if (res.success) {
           resolve(res);
@@ -66,13 +61,17 @@ const httpRequestMiddleware = ({ getState, dispatch }) => {
       next(action);
 
       // HTTPリクエストを実行する
-      return fetch(action, csrfToken, next, dispatch)
+      return fetch(action, csrfToken)
         .then((response) => {
           // リクエスト成功時のアクションを発行
-          const nextAction = {
+          let nextAction = {
             type: `${action.type}_SUCCESS`,
             response,
           };
+          // レスポンスが返却されたが条件がマッチしない場合、エラー扱い
+          if (!response.success){
+            nextAction.type = `${action.type}_FAILURE`;
+          }
           next(nextAction);
           return nextAction;
         })

@@ -13,7 +13,6 @@ class TracksController < ApplicationController
     if(tracks.count === 10)
       render json: {
         :success => false,
-        :data => tracks,
         :message => '１つのアルバムには10件以上は登録できません！'
       }
     else
