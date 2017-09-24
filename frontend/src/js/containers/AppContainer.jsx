@@ -18,10 +18,7 @@ class AppContainer extends React.Component {
 
   onSubmitLogOut(e) {
     e.preventDefault();
-    this.props.appActions.logout()
-      .then(() => {
-        window.location.href = '/users/sign_in';
-      });
+    this.props.appActions.logout();
   }
 
   onClickToolBtn(e) {
