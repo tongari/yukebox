@@ -13,7 +13,7 @@ const MyListCell = (props) => {
       {
         myPlayList.map((item) => {
           return (
-            <section className="c-cell" key={`myPlayList_${item.id}`}>
+            <section className="c-cell-thin" key={`myPlayList_${item.id}`}>
 
               <div className="p-myListCell__body">
                 <div>

@@ -1,18 +1,34 @@
 import React from 'react';
 
 
+const onUpDown = (id, track_num, isUp, track_id, idx, editTrack) => {
+  return (e) => {
+    e.preventDefault();
+    editTrack(id, track_num, isUp, track_id, idx);
+  }
+};
+
+const disableUpBtn = (idx) => {
+  return (idx === 0) ? 'is-disable' : '';
+};
+
+const disableDownBtn = (idx, itemsLen) => {
+  return (idx === itemsLen - 1) ? 'is-disable' : '';
+};
+
 const MyListEditCell = (props) => {
   const {
     myPlayList,
+    editTrack,
     deleteTrack,
   } = props;
 
   return (
     <div>
       {
-        myPlayList.map((item) => {
+        myPlayList.map((item, idx) => {
           return (
-            <section className="c-cell-thin" key={`myPlayListEdit_${item.id}`}>
+            <section className="c-cell-thin" key={`MyListEditCell${item.id}`}>
               <div className="p-myListCell__body">
                 <div>
                   <img src={`https://i.ytimg.com/vi/${item.video_id}/default.jpg`} width={60} alt="" />
@@ -29,14 +45,16 @@ const MyListEditCell = (props) => {
                   </li>
                   <li>
                     <a
-                      className="p-myListCell__up"
+                      className={`p-myListCell__up ${disableUpBtn(idx)}`}
                       href="#"
+                      onClick={onUpDown(item.id, item.track_num, true, item.track_id, idx, editTrack)}
                     >&nbsp;</a>
                   </li>
                   <li>
                     <a
-                      className="p-myListCell__down"
+                      className={`p-myListCell__down ${disableDownBtn(idx, myPlayList.length)}`}
                       href="#"
+                      onClick={onUpDown(item.id, item.track_num, false, item.track_id, idx, editTrack)}
                     >&nbsp;</a>
                   </li>
                   <li>

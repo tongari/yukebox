@@ -96,18 +96,3 @@ export const deleteMyListTitle = (id) => {
     );
   };
 };
-
-
-export const showAddTrack = (editId) => {
-  return {
-    type: SHOW_ADD_TRACK,
-    editId,
-  };
-};
-
-export const showEditTrack = (editId) => {
-  return {
-    type: SHOW_EDIT_TRACK,
-    editId,
-  };
-};

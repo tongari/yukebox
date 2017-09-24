@@ -1,7 +1,7 @@
 class TracksController < ApplicationController
 
   def show
-    tracks = Track.where(track_id: params[:id])
+    tracks = Track.where(track_id: params[:id]).order('track_num ASC')
     render json: {
       :success => true,
       :data => tracks,
@@ -43,7 +43,7 @@ class TracksController < ApplicationController
   end
 
   def bulkEdit
-    tracks = Track.where(id: params[:ids])
+    tracks = Track.where(id: params[:ids]).order('track_num ASC')
     bulkTracks = []
     tracks.each_with_index do |item, idx|
       item[:track_num] = params[:track_nums][idx];

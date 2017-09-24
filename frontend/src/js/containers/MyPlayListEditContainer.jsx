@@ -28,6 +28,7 @@ class MyPlayListEditContainer extends React.Component {
         />
         <MyPlayListEditCell
           myPlayList={myPlayList}
+          editTrack={myPlayListEditActions.editTrack}
           deleteTrack={myPlayListEditActions.deleteTrack}
         />
         <SearchVideoModal

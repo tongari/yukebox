@@ -95,26 +95,35 @@ export const addTrack = (id, videoId, title) => {
 };
 
 
-export const editTrack = () => {
+export const editTrack = (id, track_num, isUp, track_id, idx) => {
   return (dispatch, getState) => {
-    // TODO ここでmodelのeditTracksを操作
     // 順番の制御
-    const store = getState();
-    const trackId = store.myPlayList.get('editId');
-    const tracks = store.myPlayList.get('editTracks').toArray();
+    const myPlayList = getState().myPlayListEdit.get('myPlayList');
 
-    const ids = tracks.map((item) => {
-      return item.id;
-    });
+    let ids =[];
+    let trackNums =[];
 
-    const trackNums = tracks.map((item) => {
-      return item.trackNum;
-    });
+    if (isUp) {
+      ids.push(myPlayList[idx-1].id);
+      ids.push(myPlayList[idx].id);
+    } else if (!isUp) {
+      ids.push(myPlayList[idx].id);
+      ids.push(myPlayList[idx+1].id);
+    }
+
+    // track_numを入れ替え
+    if (isUp) {
+      trackNums.push(myPlayList[idx].track_num);
+      trackNums.push(myPlayList[idx-1].track_num);
+    } else if (!isUp) {
+      trackNums.push(myPlayList[idx+1].track_num);
+      trackNums.push(myPlayList[idx].track_num);
+    }
 
     return dispatch(
       webApiUtils.updateTrack({
         type: EDIT_TRACK,
-        track_id: trackId,
+        track_id,
         ids,
         track_nums: trackNums,
       }),

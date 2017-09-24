@@ -13,7 +13,7 @@ const SearchResult = (props) => {
       {
         searchVideoItems.map((item) => {
           return (
-            <section className="c-cell-thin" key={item.id.videoId}>
+            <section className="c-cell-thin" key={`SearchResult_${item.id.videoId}`}>
               <div className="p-myListCell__body">
                 <div>
                   <img src={item.snippet.thumbnails.default.url} width={60} alt="" />
