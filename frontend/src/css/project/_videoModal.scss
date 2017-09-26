@@ -18,9 +18,9 @@
   }
 
   &__body{
-    max-width: 960px;
-    height: 315px;
-    background-color: rgba(255, 255, 255, 1);
+    max-width: 854px;
+    max-height: 480px;
+    //background-color: rgba(255, 255, 255, 1);
     top: 0;
     bottom: 0;
     right: 0;
@@ -28,14 +28,27 @@
     margin: auto;
     position: absolute;
     z-index: 2;
-    overflow: hidden;
+    //overflow: hidden;
   }
 
+  //&__player{
+  //  float: left;
+  //  position: relative;
+  //  width: 560px;
+  //  height: 315px;
+  //
+  //  iframe{
+  //    width: 100%;
+  //    position: absolute;
+  //    top:0;
+  //    left: 0;
+  //  }
+  //}
+
   &__player{
-    float: left;
     position: relative;
-    width: 560px;
-    height: 315px;
+    max-width: 854px;
+    max-height: 480px;
 
     iframe{
       width: 100%;
@@ -43,39 +56,45 @@
       top:0;
       left: 0;
     }
-  }
-
-  &__trackList{
-    padding-right: 4px;
-    height: 315px;
-    overflow-y: auto;
-
-    &Body{
-      display: table;
-
-      > * {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: left;
-      }
-    }
-
-    &Thumb{
-      width: 60px;
-    }
-
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .p-videoModal__player{
-    width: 100%;
 
     &:before{
       content:"";
       display: block;
       padding-top: 56.25%; /* 高さと幅の比を16:9に固定。9/16*100=56.25 */
     }
-
   }
+
+  //&__trackList{
+  //  padding-right: 4px;
+  //  height: 315px;
+  //  overflow-y: auto;
+  //
+  //  &Body{
+  //    display: table;
+  //
+  //    > * {
+  //      display: table-cell;
+  //      vertical-align: middle;
+  //      text-align: left;
+  //    }
+  //  }
+  //
+  //  &Thumb{
+  //    width: 60px;
+  //  }
+  //
+  //}
 }
+
+//@media screen and (max-width: 800px) {
+//  .p-videoModal__player{
+//    width: 100%;
+//
+//    &:before{
+//      content:"";
+//      display: block;
+//      padding-top: 56.25%; /* 高さと幅の比を16:9に固定。9/16*100=56.25 */
+//    }
+//
+//  }
+//}

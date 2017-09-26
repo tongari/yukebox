@@ -7,14 +7,6 @@ import Youtube from 'react-youtube';
 class VideoModalContainer extends React.Component {
   constructor(props) {
     super(props)
-    this.youtubeOpts = {
-      width: '100%',
-      height: '100%',
-      playerVars: {
-        autoplay: 1
-      }
-    };
-
     this.youtubePlayer = null;
     this.onYoutubeReady = this.onYoutubeReady.bind(this);
     this.onYoutubeEnd = this.onYoutubeEnd.bind(this);
@@ -23,13 +15,16 @@ class VideoModalContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.appStore.get('youtubePlayIdx') !== nextProps.appStore.get('youtubePlayIdx')) {
       if (this.props.appStore.get('isDisplayYoutubePlayer')){
-        this.youtubePlayer.props.onPlay();
+        // this.youtubePlayer.props.onPlay();
       }
     }
   }
 
   onYoutubeReady(e) {
-    e.target.playVideo();
+    setTimeout(() => {
+      // e.target.playVideo();
+      e.target.playVideoAt(this.props.appStore.get('youtubePlayIdx'));
+    }, 250);
   }
 
   onYoutubeEnd() {
@@ -46,14 +41,25 @@ class VideoModalContainer extends React.Component {
       const idx = this.props.appStore.get('youtubePlayIdx');
       const youtubePlayList = this.props.appStore.get('youtubePlayList');
       const videoId = youtubePlayList[idx].video_id;
+      const playQueList = youtubePlayList.map((item) => {
+        return item.video_id;
+      }).toString();
 
       return (
         <div className="p-videoModal">
           <div className="p-videoModal__body">
             <div className="p-videoModal__player">
               <Youtube
-                videoId={videoId}
-                opts={this.youtubeOpts}
+                opts={
+                  {
+                    width: '100%',
+                    height: '100%',
+                    playerVars: {
+                      autoplay: 1,
+                      playlist: playQueList,
+                    },
+                  }
+                }
                 onReady={this.onYoutubeReady}
                 onEnd={this.onYoutubeEnd}
                 ref={
@@ -63,28 +69,30 @@ class VideoModalContainer extends React.Component {
                 }
               />
             </div>
-            <div className="p-videoModal__trackList c-group -space-XXS">
-              {
-                youtubePlayList.map((item, idx) => {
-                  return(
-                    <button
-                      className="u-block"
-                      onClick={
-                        () => {
-                          this.props.appActions.changeYoutubePlayIdx(idx);
-                        }
-                      }
-                    >
-                      <div className="p-videoModal__trackListBody" key={`videoModal__trackList__${item.video_id}`}>
-                        <img className="p-videoModal__trackListThumb" src={`https://i.ytimg.com/vi/${item.video_id}/default.jpg`} width={60} alt="" />
-                        <p className="u-text-size-S u-inner-space-l-XS">{item.track_title}</p>
-                      </div>
-                    </button>
+            {/*<div className="p-videoModal__trackList c-group -space-XXS">*/}
+              {/*{*/}
+                {/*youtubePlayList.map((item, idx) => {*/}
+                  {/*return(*/}
+                    {/*<a*/}
+                      {/*href="#"*/}
+                      {/*key={`videoModal__trackList__${item.video_id}`}*/}
+                      {/*className="u-block"*/}
+                      {/*onClick={*/}
+                        {/*() => {*/}
+                          {/*this.props.appActions.changeYoutubePlayIdx(idx);*/}
+                        {/*}*/}
+                      {/*}*/}
+                    {/*>*/}
+                      {/*<div className="p-videoModal__trackListBody" key={`videoModal__trackList__${item.video_id}`}>*/}
+                        {/*<img className="p-videoModal__trackListThumb" src={`https://i.ytimg.com/vi/${item.video_id}/default.jpg`} width={60} alt="" />*/}
+                        {/*<p className="u-text-size-S u-inner-space-l-XS">{item.track_title}</p>*/}
+                      {/*</div>*/}
+                    {/*</a>*/}
 
-                  )
-                })
-              }
-            </div>
+                  {/*)*/}
+                {/*})*/}
+              {/*}*/}
+            {/*</div>*/}
           </div>
           <button
             className="p-videoModal__closeModalButton"
