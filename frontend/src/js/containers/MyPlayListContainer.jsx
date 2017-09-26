@@ -10,8 +10,8 @@ import MyListCell from '../components/MyListCell';
  * MyPlayListContainer
  */
 class MyPlayListContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onChangeMyListTitle = this.onChangeMyListTitle.bind(this);
     this.onClickMyListTitleInput = this.onClickMyListTitleInput.bind(this);
     this.onClickAddListModal = this.onClickAddListModal.bind(this);

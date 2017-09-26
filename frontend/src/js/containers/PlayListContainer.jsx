@@ -1,8 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as playListActions from './../actions/playList';
+import * as appActions from './../actions/app';
 
 
 const style = () => (
@@ -32,30 +32,46 @@ class PlayListContainer extends React.Component {
       <div>
         <ul>
           <li style={style()}>
-            <p>アルバム</p>
-            <img src="https://i.ytimg.com/vi/43D_nBGfuGY/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/2MNL2mU8pBE/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/AfjteCMzYUo/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/7aJmUeLMZi4/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/oGLKmSpgzXA/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/qA6a7hrpoRg/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/gj5Nu6feFTQ/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/_B09-nM3knE/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/JHlX4MtHSeU/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/QqqlBerbOhE/default.jpg" alt="" />
+            <button
+              onClick={
+                () => {
+                  this.props.appActions.showYoutubePlayer();
+                }
+              }
+            >
+              <p>アルバム</p>
+              <img src="https://i.ytimg.com/vi/43D_nBGfuGY/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/2MNL2mU8pBE/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/AfjteCMzYUo/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/7aJmUeLMZi4/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/oGLKmSpgzXA/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/qA6a7hrpoRg/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/gj5Nu6feFTQ/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/_B09-nM3knE/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/JHlX4MtHSeU/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/QqqlBerbOhE/default.jpg" alt="" />
+            </button>
           </li>
           <li style={style()}>
-            <p>アルバム</p>
-            <img src="https://i.ytimg.com/vi/43D_nBGfuGY/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/2MNL2mU8pBE/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/AfjteCMzYUo/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/7aJmUeLMZi4/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/oGLKmSpgzXA/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/qA6a7hrpoRg/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/gj5Nu6feFTQ/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/_B09-nM3knE/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/JHlX4MtHSeU/default.jpg" alt="" />
-            <img src="https://i.ytimg.com/vi/QqqlBerbOhE/default.jpg" alt="" />
+            <button
+              onClick={
+                () => {
+                  this.props.appActions.showYoutubePlayer();
+                }
+              }
+            >
+              <p>アルバム</p>
+              <img src="https://i.ytimg.com/vi/43D_nBGfuGY/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/2MNL2mU8pBE/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/AfjteCMzYUo/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/7aJmUeLMZi4/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/oGLKmSpgzXA/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/qA6a7hrpoRg/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/gj5Nu6feFTQ/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/_B09-nM3knE/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/JHlX4MtHSeU/default.jpg" alt="" />
+              <img src="https://i.ytimg.com/vi/QqqlBerbOhE/default.jpg" alt="" />
+            </button>
           </li>
         </ul>
       </div>
@@ -68,6 +84,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   playListActions: bindActionCreators(playListActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch),
 });
 export default connect(
   mapStateToProps,

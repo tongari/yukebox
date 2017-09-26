@@ -6,8 +6,8 @@ import routerPath from '../config/router';
 import * as appActions from './../actions/app';
 
 class AppContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onSubmitLogOut = this.onSubmitLogOut.bind(this);
     this.onClickToolBtn = this.onClickToolBtn.bind(this);
   }

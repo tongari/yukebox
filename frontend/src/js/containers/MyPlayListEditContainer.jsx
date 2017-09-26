@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as myPlayListEditActions from './../actions/myPlayListEdit';
+import * as appActions from './../actions/app';
 
 import MyListEditTool from '../components/MyListEditTool';
 import MyPlayListEditCell from '../components/MyListEditCell';
@@ -25,12 +26,15 @@ class MyPlayListEditContainer extends React.Component {
       <div>
         <MyListEditTool
           showSearchModal={myPlayListEditActions.showSearchModal}
+          myPlayList={myPlayList}
+          showYoutubePlayer={this.props.appActions.showYoutubePlayer}
         />
         <MyPlayListEditCell
           myPlayList={myPlayList}
           editTrack={myPlayListEditActions.editTrack}
           deleteTrack={myPlayListEditActions.deleteTrack}
           urlId={this.props.match.params.id}
+          showYoutubePlayer={this.props.appActions.showYoutubePlayer}
         />
         <SearchVideoModal
           isDisplaySearchModal={isDisplaySearchModal}
@@ -53,6 +57,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   myPlayListEditActions: bindActionCreators(myPlayListEditActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch),
 });
 export default connect(
   mapStateToProps,

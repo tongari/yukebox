@@ -12,6 +12,23 @@ const playList = (state = new App(), action) => {
       return state.set('isDisplayHeaderTool', !state.get('isDisplayHeaderTool'));
     }
 
+    case appActions.SHOW_YOUTUBE_PLAYER: {
+      return state.withMutations((s) => {
+        s.set('youtubePlayList', action.playList)
+          .set('youtubePlayIdx', action.playIdx)
+          .set('isYoutubeAutoPlay', action.isAutoPlay)
+          .set('isDisplayYoutubePlayer', true);
+      });
+    }
+
+    case appActions.HIDE_YOUTUBE_PLAYER: {
+      return state.set('isDisplayYoutubePlayer', false);
+    }
+
+    case appActions.CHANGE_YOUTUBE_PLAY_IDX: {
+      return state.set('youtubePlayIdx', action.idx);
+    }
+
     default:
       return state;
   }

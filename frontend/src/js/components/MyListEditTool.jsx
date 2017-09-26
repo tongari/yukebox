@@ -4,6 +4,8 @@ import React from 'react';
 const MyListEditTool = (props) => {
   const {
     showSearchModal,
+    myPlayList,
+    showYoutubePlayer,
   } = props;
 
   return (
@@ -21,6 +23,12 @@ const MyListEditTool = (props) => {
       <a
         className="p-myListCell__play"
         href="#"
+        onClick={
+          (e) => {
+            e.preventDefault();
+            showYoutubePlayer(myPlayList , 0, true);
+          }
+        }
       >全て再生</a>
     </div>
   );

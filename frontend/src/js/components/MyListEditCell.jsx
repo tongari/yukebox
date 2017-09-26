@@ -22,6 +22,7 @@ const MyListEditCell = (props) => {
     editTrack,
     deleteTrack,
     urlId,
+    showYoutubePlayer,
   } = props;
 
   return (
@@ -42,6 +43,12 @@ const MyListEditCell = (props) => {
                     <a
                       className="p-myListCell__play"
                       href="#"
+                      onClick={
+                        (e) => {
+                          e.preventDefault();
+                          showYoutubePlayer(myPlayList, idx);
+                        }
+                      }
                     >&nbsp;</a>
                   </li>
                   <li>
