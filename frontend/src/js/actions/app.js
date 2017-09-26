@@ -43,6 +43,7 @@ export const changeDisplayHeaderTool = () => {
 };
 
 export const showYoutubePlayer = (playList, playIdx, isAutoPlay = false) => {
+  document.querySelector('body').style.overflow = 'hidden';
   return {
     type: SHOW_YOUTUBE_PLAYER,
     playList,
@@ -52,6 +53,7 @@ export const showYoutubePlayer = (playList, playIdx, isAutoPlay = false) => {
 };
 
 export const hideYoutubePlayer = () => {
+  document.querySelector('body').style.overflow = '';
   return {
     type: HIDE_YOUTUBE_PLAYER,
   };

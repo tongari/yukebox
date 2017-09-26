@@ -8,6 +8,15 @@
   width: 100%;
   height: 100%;
 
+  &__closeModalButton{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .75);
+    cursor: pointer;
+  }
+
   &__body{
     max-width: 960px;
     height: 315px;
@@ -19,18 +28,11 @@
     margin: auto;
     position: absolute;
     z-index: 2;
-  }
-
-  &__closeModalButton{
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .75);
-    cursor: pointer;
+    overflow: hidden;
   }
 
   &__player{
+    float: left;
     position: relative;
     width: 560px;
     height: 315px;
@@ -42,9 +44,30 @@
       left: 0;
     }
   }
+
+  &__trackList{
+    padding-right: 4px;
+    height: 315px;
+    overflow-y: auto;
+
+    &Body{
+      display: table;
+
+      > * {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+      }
+    }
+
+    &Thumb{
+      width: 60px;
+    }
+
+  }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 800px) {
   .p-videoModal__player{
     width: 100%;
 

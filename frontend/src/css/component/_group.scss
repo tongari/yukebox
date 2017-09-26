@@ -26,6 +26,10 @@
     padding: $f-margin-M;
   }
 
+  &.-space-XXS{
+    @include firstChildMargin($f-margin-XXS);
+  }
+
   &.-space-XS{
     @include firstChildMargin($f-margin-XS);
   }

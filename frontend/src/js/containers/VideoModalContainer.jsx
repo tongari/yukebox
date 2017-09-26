@@ -22,7 +22,9 @@ class VideoModalContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.appStore.get('youtubePlayIdx') !== nextProps.appStore.get('youtubePlayIdx')) {
-      this.youtubePlayer.props.onPlay();
+      if (this.props.appStore.get('isDisplayYoutubePlayer')){
+        this.youtubePlayer.props.onPlay();
+      }
     }
   }
 
@@ -40,9 +42,10 @@ class VideoModalContainer extends React.Component {
   }
 
   render() {
-    if (this.props.appStore.isDisplayYoutubePlayer){
+    if (this.props.appStore.get('isDisplayYoutubePlayer')) {
       const idx = this.props.appStore.get('youtubePlayIdx');
-      const videoId = this.props.appStore.get('youtubePlayList')[idx].video_id;
+      const youtubePlayList = this.props.appStore.get('youtubePlayList');
+      const videoId = youtubePlayList[idx].video_id;
 
       return (
         <div className="p-videoModal">
@@ -59,6 +62,28 @@ class VideoModalContainer extends React.Component {
                   }
                 }
               />
+            </div>
+            <div className="p-videoModal__trackList c-group -space-XXS">
+              {
+                youtubePlayList.map((item, idx) => {
+                  return(
+                    <button
+                      className="u-block"
+                      onClick={
+                        () => {
+                          this.props.appActions.changeYoutubePlayIdx(idx);
+                        }
+                      }
+                    >
+                      <div className="p-videoModal__trackListBody" key={`videoModal__trackList__${item.video_id}`}>
+                        <img className="p-videoModal__trackListThumb" src={`https://i.ytimg.com/vi/${item.video_id}/default.jpg`} width={60} alt="" />
+                        <p className="u-text-size-S u-inner-space-l-XS">{item.track_title}</p>
+                      </div>
+                    </button>
+
+                  )
+                })
+              }
             </div>
           </div>
           <button
