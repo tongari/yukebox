@@ -6,7 +6,7 @@ import Youtube from 'react-youtube';
 
 class VideoModalContainer extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.youtubePlayer = null;
     this.onYoutubeReady = this.onYoutubeReady.bind(this);
     this.onYoutubeEnd = this.onYoutubeEnd.bind(this);
@@ -24,7 +24,7 @@ class VideoModalContainer extends React.Component {
     setTimeout(() => {
       // e.target.playVideo();
       e.target.playVideoAt(this.props.appStore.get('youtubePlayIdx'));
-    }, 250);
+    }, 500);
   }
 
   onYoutubeEnd() {
