@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import routerPath from '../config/router';
 
-const MyListCell = (props) => {
+const ListCell = (props) => {
   const {
-    myPlayList,
-    deleteMyListTitle,
+    playList,
   } = props;
 
   return (
     <div>
       {
-        myPlayList.map((item) => {
+        playList.map((item) => {
           let thumb = '';
           if (item.tracks.length > 0) {
             const idx = Math.floor(Math.random() * item.tracks.length);
@@ -33,25 +30,6 @@ const MyListCell = (props) => {
                       href="#"
                     >&nbsp;</a>
                   </li>
-                  <li>
-                    <Link
-                      to={`${routerPath.MY_PLAY_LIST_EDIT}/${item.id}`}
-                      className="p-myListCell__edit"
-                      href="#"
-                    >&nbsp;</Link>
-                  </li>
-                  <li>
-                    <a
-                      className="p-myListCell__delete"
-                      href="#"
-                      onClick={
-                        (e) => {
-                          e.preventDefault();
-                          deleteMyListTitle(item.id);
-                        }
-                      }
-                    >&nbsp;</a>
-                  </li>
                 </ul>
               </div>
             </section>
@@ -62,4 +40,4 @@ const MyListCell = (props) => {
   );
 };
 
-export default MyListCell;
+export default ListCell;

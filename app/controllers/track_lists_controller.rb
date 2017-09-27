@@ -13,10 +13,14 @@ class TrackListsController < ApplicationController
   end
 
   def myAlbum
-    album = TrackList.where(user_id: current_user.id).order('id ASC')
+    album = TrackList.where(user_id: current_user.id).order('id ASC').includes(:tracks)
+    resAlbum = album.as_json
+    resAlbum.each_with_index do |item, idx|
+      item['tracks'] = album[idx].tracks
+    end
     render json: {
       :success => true,
-      :data => album
+      :data => resAlbum
     }
   end
 
