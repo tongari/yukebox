@@ -1,12 +1,10 @@
 class TrackListsController < ApplicationController
   def index
-    trackLists = TrackList.all
-    tracks = Track.all
+    trackLists = TrackList.all.includes(:tracks)
 
-    # TODO N+1問題解決できる？？
     resTrackLists = trackLists.as_json
-    resTrackLists.each do |item|
-      item[:tracks] = tracks.where(track_id: [item['id']])
+    resTrackLists.each_with_index do |item, idx|
+      item['tracks'] = trackLists[idx].tracks
     end
     render json: {
       :success => true,
