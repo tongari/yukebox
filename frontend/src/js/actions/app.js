@@ -3,6 +3,7 @@ import * as webApiUtils from '../webApiUtils/app';
 export const LOGOUT = 'LOGOUT';
 export const SET_CSRF_TOKEN = 'APP_SET_CSRF_TOKEN';
 export const CHANGE_DISPLAY_HEADER_TOOL = 'CHANGE_DISPLAY_HEADER_TOOL';
+export const HIDE_DISPLAY_HEADER_TOOL = 'HIDE_DISPLAY_HEADER_TOOL';
 export const SHOW_YOUTUBE_PLAYER = 'SHOW_YOUTUBE_PLAYER';
 export const HIDE_YOUTUBE_PLAYER = 'HIDE_YOUTUBE_PLAYER';
 export const CHANGE_YOUTUBE_PLAY_IDX = 'CHANGE_YOUTUBE_PLAY_IDX';
@@ -39,6 +40,12 @@ export const logout = () => {
 export const changeDisplayHeaderTool = () => {
   return {
     type: CHANGE_DISPLAY_HEADER_TOOL,
+  };
+};
+
+export const hideDisplayHeaderTool = () => {
+  return {
+    type: HIDE_DISPLAY_HEADER_TOOL,
   };
 };
 

@@ -12,11 +12,13 @@ import ListCell from '../components/ListCell';
 class PlayListContainer extends React.Component {
   componentWillMount() {
     this.props.playListActions.fetchPlayList();
+    this.props.appActions.hideDisplayHeaderTool();
   }
 
   render() {
     return (
       <div>
+        <h1 className="p-myPlayList__title">みんなのプレイリスト</h1>
         <ListCell
           playList={this.props.playList.get('playListData')}
         />

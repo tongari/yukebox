@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as myPlayListActions from './../actions/myPlayList';
+import * as appActions from './../actions/app';
 
 import AddListModal from '../components/AddListModal';
 import MyListCell from '../components/MyListCell';
@@ -20,6 +21,7 @@ class MyPlayListContainer extends React.Component {
 
   componentWillMount() {
     this.props.myPlayListActions.getMyPlayList();
+    this.props.appActions.hideDisplayHeaderTool();
   }
 
   onChangeMyListTitle(e) {
@@ -57,7 +59,7 @@ class MyPlayListContainer extends React.Component {
     return (
       <div>
         <div className="p-myPlayList">
-          <h1 className="p-myPlayList__title">マイプレイリスト</h1>
+          <h1 className="p-myPlayList__title">自分のプレイリスト</h1>
           <div className="p-myPlayList__addList">
             <a
               href="#"
@@ -89,6 +91,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   myPlayListActions: bindActionCreators(myPlayListActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch),
 });
 export default connect(
   mapStateToProps,

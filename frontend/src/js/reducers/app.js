@@ -12,6 +12,10 @@ const playList = (state = new App(), action) => {
       return state.set('isDisplayHeaderTool', !state.get('isDisplayHeaderTool'));
     }
 
+    case appActions.HIDE_DISPLAY_HEADER_TOOL: {
+      return state.set('isDisplayHeaderTool', false);
+    }
+
     case appActions.SHOW_YOUTUBE_PLAYER: {
       return state.withMutations((s) => {
         s.set('youtubePlayList', action.playList)

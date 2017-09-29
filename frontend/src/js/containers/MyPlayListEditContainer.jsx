@@ -14,6 +14,7 @@ import SearchVideoModal from '../components/SearchVideoModal';
 class MyPlayListEditContainer extends React.Component {
   componentWillMount() {
     this.props.myPlayListEditActions.getSingleMyPlayList(this.props.match.params.id);
+    this.props.appActions.hideDisplayHeaderTool();
   }
 
   render() {
