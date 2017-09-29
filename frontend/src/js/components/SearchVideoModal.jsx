@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingBar from 'react-redux-loading-bar';
 import SearchVideoForm from './SearchVideoForm';
 import SearchResult from './SearchResult';
 
@@ -24,7 +25,7 @@ const SearchVideoModal = (props) => {
   return (
     <div style={modalStyle(isDisplaySearchModal)} className="p-searchModal">
       <div className="p-searchModal__body">
-
+        <LoadingBar updateTime={1} />
         <SearchVideoForm
           searchKeyword={searchKeyword}
           changeKeyword={changeKeyword}

@@ -1,3 +1,5 @@
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
+
 /**
  * fetch
 */
@@ -46,7 +48,7 @@ const fetch = (action, csrfToken = null) => {
  * @param dispatch
  * @returns {function(*=)}
  */
-const httpRequestMiddleware = ({ getState, dispatch }) => {
+const httpRequestMiddleware = ({ dispatch, getState }) => {
   return (next) => {
     return async (action_) => {
       const action = action_;
@@ -63,6 +65,8 @@ const httpRequestMiddleware = ({ getState, dispatch }) => {
       // HTTPリクエスト開始を通知してローディングなどを表示するため
       next(action);
 
+      dispatch(showLoading());
+
       // HTTPリクエストを実行する
       return fetch(action, csrfToken)
         .then((response) => {
@@ -75,6 +79,9 @@ const httpRequestMiddleware = ({ getState, dispatch }) => {
           if (!response.success){
             nextAction.type = `${action.type}_FAILURE`;
           }
+          setTimeout(()=>{
+            dispatch(hideLoading());
+          },250);
           next(nextAction);
           return nextAction;
         })
@@ -84,6 +91,7 @@ const httpRequestMiddleware = ({ getState, dispatch }) => {
             type: `${action.type}_FAILURE`,
             error,
           };
+          dispatch(hideLoading());
           next(nextAction);
           return Promise.reject(nextAction);
         });

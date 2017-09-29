@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import LoadingBar from 'react-redux-loading-bar'
 import routerPath from '../config/router';
 import * as appActions from './../actions/app';
 
@@ -32,30 +33,34 @@ class AppContainer extends React.Component {
 
   render() {
     return (
-      <header className="p-header">
-        <span className="p-header__logo" />
-        <button className="p-header__toolBtn" onClick={this.onClickToolBtn} />
-        <nav className={this.toolStyle()}>
-          <ul className="p-header__toolBody c-group -space-S">
-            <li>
-              <a className="p-header__logout" href="#" onClick={this.onSubmitLogOut}>
-                ログアウト
-              </a>
-            </li>
-            <li>
-              <Link to="/" className="p-header__playList">
-                みんなのプレイリスト
-              </Link>
-            </li>
-            <li>
-              <Link to={routerPath.MY_PLAY_LIST} className="p-header__playList">
-                自分のプレイリスト
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        {this.props.children}
-      </header>
+      <div>
+        <header className="p-header">
+          <span className="p-header__logo" />
+          <button className="p-header__toolBtn" onClick={this.onClickToolBtn} />
+          <nav className={this.toolStyle()}>
+            <ul className="p-header__toolBody c-group -space-S">
+              <li>
+                <a className="p-header__logout" href="#" onClick={this.onSubmitLogOut}>
+                  ログアウト
+                </a>
+              </li>
+              <li>
+                <Link to="/" className="p-header__playList">
+                  みんなのプレイリスト
+                </Link>
+              </li>
+              <li>
+                <Link to={routerPath.MY_PLAY_LIST} className="p-header__playList">
+                  自分のプレイリスト
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          {this.props.children}
+        </header>
+        <LoadingBar updateTime={1} />
+      </div>
+
     );
   }
 }

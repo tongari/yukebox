@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
+import { loadingBarReducer, loadingBarMiddleware } from 'react-redux-loading-bar'
 import reducers from '../reducers/index';
 import httpRequestMiddleware from '../middleware/httpRequestMiddleware';
 
@@ -11,6 +12,7 @@ export default function configureStore() {
   const middleware = [
     thunk,
     httpRequestMiddleware,
+    loadingBarMiddleware(),
   ];
 
   // chromeのreduxdevtoolをprod環境以外に適用
@@ -21,6 +23,7 @@ export default function configureStore() {
 
   const addReducers = Object.assign(reducers, {
     routing: routerReducer,
+    loadingBar: loadingBarReducer,
   });
 
   const store = createStore(
