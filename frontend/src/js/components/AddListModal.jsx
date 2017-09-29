@@ -1,10 +1,5 @@
 import React from 'react';
-
-const titleInputStyle = (isDisplayTitleInput) => {
-  return {
-    display: (isDisplayTitleInput) ? 'block' : 'none',
-  };
-};
+import { VelocityTransitionGroup } from 'velocity-react';
 
 const AddListModal = (props) => {
   const {
@@ -16,9 +11,25 @@ const AddListModal = (props) => {
     onClickAddListModal,
   } = props;
 
-  return (
-    <div style={titleInputStyle(isDisplayTitleInput)} className="p-addListModal">
-      <div className="p-addListModal__inputArea">
+  if (isDisplayTitleInput) {
+    return (
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={
+          {
+            animation: 'fadeIn',
+            duration: 150,
+          }
+        }
+        leave={
+          {
+            animation: 'fadeOut',
+            duration: 50,
+          }
+        }
+      >
+      <div className="p-addListModal">
+        <div className="p-addListModal__inputArea">
         <textarea
           className="p-addListModal__input"
           maxLength={50}
@@ -28,11 +39,15 @@ const AddListModal = (props) => {
           value={playListTitle}
           onChange={onChangeMyListTitle}
         />
-        <a className="c-btn-default u-space-t-M" href="#" onClick={onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
+          <a className="c-btn-default u-space-t-M" href="#" onClick={onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
+        </div>
+        <button className="p-addListModal__closeModalButton" onClick={onClickAddListModal} />
       </div>
-      <button className="p-addListModal__closeModalButton" onClick={onClickAddListModal} />
-    </div>
-  );
+      </VelocityTransitionGroup>
+    );
+  }
+
+  return null;
 };
 
 export default AddListModal;

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as appActions from './../actions/app';
 import Youtube from 'react-youtube';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 class VideoModalContainer extends React.Component {
   constructor(props) {
@@ -46,6 +47,21 @@ class VideoModalContainer extends React.Component {
       }).toString();
 
       return (
+        <VelocityTransitionGroup
+          runOnMount={true}
+          enter={
+            {
+              animation: 'fadeIn',
+              duration: 250,
+            }
+          }
+          leave={
+            {
+              animation: 'fadeOut',
+              duration: 50,
+            }
+          }
+        >
         <div className="p-videoModal">
           <div className="p-videoModal__body">
             <div className="p-videoModal__player">
@@ -103,6 +119,7 @@ class VideoModalContainer extends React.Component {
             }
           />
         </div>
+        </VelocityTransitionGroup>
       );
     }
     return null;

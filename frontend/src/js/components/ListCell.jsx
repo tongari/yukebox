@@ -1,4 +1,5 @@
 import React from 'react';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 const ListCell = (props) => {
   const {
@@ -7,6 +8,23 @@ const ListCell = (props) => {
 
   return (
     <div>
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={
+          {
+            animation: 'fadeIn',
+            duration: 250,
+            stagger: 100,
+            delay: 250,
+          }
+        }
+        leave={
+          {
+            animation: 'fadeOut',
+            duration: 50,
+          }
+        }
+      >
       {
         playList.map((item) => {
           let thumb = '';
@@ -36,6 +54,7 @@ const ListCell = (props) => {
           );
         })
       }
+      </VelocityTransitionGroup>
     </div>
   );
 };

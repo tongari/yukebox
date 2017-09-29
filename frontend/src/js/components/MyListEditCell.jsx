@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { VelocityTransitionGroup } from 'velocity-react';
 
 const onUpDown = (id, track_num, isUp, track_id, idx, editTrack) => {
   return (e) => {
@@ -27,6 +27,23 @@ const MyListEditCell = (props) => {
 
   return (
     <div>
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={
+          {
+            animation: 'fadeIn',
+            duration: 250,
+            stagger: 50,
+            delay: 250,
+          }
+        }
+        leave={
+          {
+            animation: 'fadeOut',
+            duration: 50,
+          }
+        }
+      >
       {
         myPlayList.map((item, idx) => {
           return (
@@ -83,6 +100,7 @@ const MyListEditCell = (props) => {
           );
         })
       }
+      </VelocityTransitionGroup>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { VelocityTransitionGroup } from 'velocity-react';
 
 const addOrCheckedIcon = (videoId, myPlayList) => {
   let isChecked = false;
@@ -24,6 +25,22 @@ const SearchResult = (props) => {
 
   return (
     <div className="p-searchModalResult">
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={
+          {
+            animation: 'fadeIn',
+            duration: 250,
+            stagger: 50,
+          }
+        }
+        leave={
+          {
+            animation: 'fadeOut',
+            duration: 50,
+          }
+        }
+      >
       {
         searchVideoItems.map((item) => {
           return (
@@ -56,6 +73,7 @@ const SearchResult = (props) => {
           );
         })
       }
+      </VelocityTransitionGroup>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { VelocityTransitionGroup } from 'velocity-react';
 import { Link } from 'react-router-dom';
 import routerPath from '../config/router';
 
@@ -10,6 +11,23 @@ const MyListCell = (props) => {
 
   return (
     <div>
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={
+          {
+            animation: 'fadeIn',
+            duration: 250,
+            stagger: 100,
+            delay: 250,
+          }
+        }
+        leave={
+          {
+            animation: 'fadeOut',
+            duration: 50,
+          }
+        }
+      >
       {
         myPlayList.map((item) => {
           let thumb = '';
@@ -58,6 +76,7 @@ const MyListCell = (props) => {
           );
         })
       }
+      </VelocityTransitionGroup>
     </div>
   );
 };
