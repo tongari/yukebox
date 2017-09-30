@@ -1,10 +1,13 @@
 class TrackListsController < ApplicationController
   def index
-    trackLists = TrackList.all.order('id DESC').includes(:tracks)
-
+    trackLists = TrackList.all.order('id DESC').includes(:tracks).includes(:user)
     resTrackLists = trackLists.as_json
     resTrackLists.each_with_index do |item, idx|
       item['tracks'] = trackLists[idx].tracks
+      item['user'] = {
+        :name => trackLists[idx].user.name,
+        :image_url => trackLists[idx].user.image_url
+      }
     end
     render json: {
       :success => true,

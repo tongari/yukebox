@@ -36,35 +36,25 @@ const ListCell = (props) => {
 
           return (
             <section className="c-cell-thin" key={`myPlayList_${item.id}`}>
-
-              <div className="p-myListCell__body">
-                <div>
-                  <h2 className="p-myListCell__title u-space-b-XS">{item.title}</h2>
-                  <button
-                    onClick={
-                      (e) => {
-                        showYoutubePlayer(item.tracks , 0, true);
-                      }
-                    }
-                  >
-                    <img src={`https://i.ytimg.com/vi/${thumb}/mqdefault.jpg`} width={320} alt="" />
-                  </button>
+              <a
+                className="p-listCell"
+                href="#"
+                onClick={
+                  (e) => {
+                    e.preventDefault();
+                    showYoutubePlayer(item.tracks , 0, true);
+                  }
+                }
+              >
+                <div className="p-listCell__thumb">
+                  <img src={`https://i.ytimg.com/vi/${thumb}/mqdefault.jpg`} width={320} alt="" />
                 </div>
-                <ul className="p-myListCell__tool">
-                  <li>
-                    <a
-                      className="p-myListCell__play"
-                      href="#"
-                      onClick={
-                        (e) => {
-                          e.preventDefault();
-                          showYoutubePlayer(item.tracks , 0, true);
-                        }
-                      }
-                    >&nbsp;</a>
-                  </li>
-                </ul>
-              </div>
+                <div className="p-listCell__info c-group -space-XS">
+                  <h2 className="p-listCell__title u-space-b-M">{item.title}</h2>
+                  <img className="p-listCell__userThumb" src={item.user.image_url} width={40} alt="" />
+                  <p>{item.user.name}</p>
+                </div>
+              </a>
             </section>
           );
         })

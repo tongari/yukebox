@@ -32,6 +32,26 @@ class HeaderContainer extends React.Component {
     return (this.props.store.app.get('isDisplayHeaderTool')) ? 'p-header__tool' : 'p-header__tool is-hidden';
   }
 
+  logInOutButton() {
+    if (this.props.store.app.get('isLogin')) {
+      return(
+        <li>
+          <a className="p-header__logout" href="#" onClick={this.onSubmitLogOut}>
+            ログアウト
+          </a>
+        </li>
+      )
+    } else {
+      return(
+        <li>
+          <a href='/users/sign_in' className="p-header__logout">
+            ログイン
+          </a>
+        </li>
+      )
+    }
+  }
+
   myPlayListButton() {
     if (this.props.store.app.get('isLogin')) {
       return(
@@ -55,11 +75,7 @@ class HeaderContainer extends React.Component {
           <button className="p-header__toolBtn" onClick={this.onClickToolBtn} />
           <nav className={this.toolStyle()}>
             <ul className="p-header__toolBody c-group -space-S">
-              <li>
-                <a className="p-header__logout" href="#" onClick={this.onSubmitLogOut}>
-                  ログアウト
-                </a>
-              </li>
+              {this.logInOutButton()}
               <li>
                 <Link to="/" className="p-header__playList">
                   みんなのプレイリスト

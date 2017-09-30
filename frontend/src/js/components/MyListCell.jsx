@@ -43,31 +43,21 @@ const MyListCell = (props) => {
               <div className="p-myListCell__body">
                 <div>
                   <h2 className="p-myListCell__title u-space-b-XS">{item.title}</h2>
-                  <button
-                    className="u-block"
+                  <a
+                    href="#"
+                    className="p-myListCell__thumb"
                     onClick={
-                      () => {
+                      (e) => {
+                        e.preventDefault();
                         showYoutubePlayer(item.tracks , 0, true);
                       }
                     }
                   >
                     <img src={`https://i.ytimg.com/vi/${thumb}/mqdefault.jpg`} width={320} alt="" />
-                  </button>
+                  </a>
 
                 </div>
                 <ul className="p-myListCell__tool">
-                  <li>
-                    <a
-                      className="p-myListCell__play"
-                      href="#"
-                      onClick={
-                        (e) => {
-                          e.preventDefault();
-                          showYoutubePlayer(item.tracks , 0, true);
-                        }
-                      }
-                    >&nbsp;</a>
-                  </li>
                   <li>
                     <Link
                       to={`${routerPath.MY_PLAY_LIST_EDIT}/${item.id}`}
