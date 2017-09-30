@@ -6,7 +6,7 @@ import LoadingBar from 'react-redux-loading-bar'
 import routerPath from '../config/router';
 import * as appActions from './../actions/app';
 
-class AppContainer extends React.Component {
+class HeaderContainer extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmitLogOut = this.onSubmitLogOut.bind(this);
@@ -15,6 +15,7 @@ class AppContainer extends React.Component {
 
   componentWillMount() {
     this.props.appActions.setCsrfToken();
+    this.props.appActions.setLoginStatus();
   }
 
   onSubmitLogOut(e) {
@@ -31,11 +32,26 @@ class AppContainer extends React.Component {
     return (this.props.store.app.get('isDisplayHeaderTool')) ? 'p-header__tool' : 'p-header__tool is-hidden';
   }
 
+  myPlayListButton() {
+    if (this.props.store.app.get('isLogin')) {
+      return(
+        <li>
+          <Link to={routerPath.MY_PLAY_LIST} className="p-header__playList">
+            自分のプレイリスト
+          </Link>
+        </li>
+      )
+    }
+    return null;
+  }
+
   render() {
     return (
       <div>
         <header className="p-header">
-          <span className="p-header__logo" />
+          <Link to="/">
+            <span className="p-header__logo" />
+          </Link>
           <button className="p-header__toolBtn" onClick={this.onClickToolBtn} />
           <nav className={this.toolStyle()}>
             <ul className="p-header__toolBody c-group -space-S">
@@ -49,11 +65,7 @@ class AppContainer extends React.Component {
                   みんなのプレイリスト
                 </Link>
               </li>
-              <li>
-                <Link to={routerPath.MY_PLAY_LIST} className="p-header__playList">
-                  自分のプレイリスト
-                </Link>
-              </li>
+              {this.myPlayListButton()}
             </ul>
           </nav>
           {this.props.children}
@@ -74,4 +86,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AppContainer);
+)(HeaderContainer);

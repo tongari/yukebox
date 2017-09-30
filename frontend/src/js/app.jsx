@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Route, BrowserRouter } from 'react-router-dom';
 import routerPath from './config/router';
 import configStore from './store/configStore';
-import AppContainer from './containers/AppContainer';
+import HeaderContainer from './containers/HeaderContainer';
 import VideoModalContainer from './containers/VideoModalContainer';
 import PlayListContainer from './containers/PlayListContainer';
 import MyPlayListContainer from './containers/MyPlayListContainer';
@@ -18,7 +18,7 @@ if (document.getElementById('app')) {
     <Provider store={store}>
       <BrowserRouter>
         <div>
-          <AppContainer />
+          <HeaderContainer />
           <VideoModalContainer />
           <div className="p-container">
             <Route exact path="/" component={PlayListContainer} />

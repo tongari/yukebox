@@ -21,6 +21,7 @@ class PlayListContainer extends React.Component {
         <h1 className="p-myPlayList__title">みんなのプレイリスト</h1>
         <ListCell
           playList={this.props.playList.get('playListData')}
+          showYoutubePlayer={this.props.appActions.showYoutubePlayer}
         />
       </div>
     );

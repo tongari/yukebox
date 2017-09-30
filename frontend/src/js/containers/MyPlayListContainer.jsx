@@ -54,8 +54,6 @@ class MyPlayListContainer extends React.Component {
     const playListTitle = this.props.store.myPlayList.get('playListTitle');
     const myPlayList = this.props.store.myPlayList.get('myPlayList');
 
-    const { myPlayListActions } = this.props;
-
     return (
       <div>
         <div className="p-myPlayList">
@@ -70,7 +68,8 @@ class MyPlayListContainer extends React.Component {
 
           <MyListCell
             myPlayList={myPlayList}
-            deleteMyListTitle={myPlayListActions.deleteMyListTitle}
+            deleteMyListTitle={this.props.myPlayListActions.deleteMyListTitle}
+            showYoutubePlayer={this.props.appActions.showYoutubePlayer}
           />
         </div>
         <AddListModal

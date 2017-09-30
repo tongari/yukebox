@@ -1,6 +1,6 @@
 class TrackListsController < ApplicationController
   def index
-    trackLists = TrackList.all.includes(:tracks)
+    trackLists = TrackList.all.order('id DESC').includes(:tracks)
 
     resTrackLists = trackLists.as_json
     resTrackLists.each_with_index do |item, idx|
@@ -13,6 +13,7 @@ class TrackListsController < ApplicationController
   end
 
   def myAlbum
+
     album = TrackList.where(user_id: current_user.id).order('id ASC').includes(:tracks)
     resAlbum = album.as_json
     resAlbum.each_with_index do |item, idx|
@@ -22,13 +23,14 @@ class TrackListsController < ApplicationController
       :success => true,
       :data => resAlbum
     }
+
   end
 
   def create
     params[:track_list][:user_id] = current_user.id
 
     @trackLists = TrackList.where(user_id: current_user.id)
-    if(@trackLists.count === 3)
+    if(@trackLists.count == 3)
       render json: {
         :success => false,
         :message => 'アルバムは3件以上登録できません！'
@@ -37,10 +39,14 @@ class TrackListsController < ApplicationController
 
       trackList = TrackList.new(trackList_params)
       if trackList.save
-        album = TrackList.where(user_id: current_user.id).order('id ASC')
+        album = TrackList.where(user_id: current_user.id).order('id ASC').includes(:tracks)
+        resAlbum = album.as_json
+        resAlbum.each_with_index do |item, idx|
+          item['tracks'] = album[idx].tracks
+        end
         render json: {
           :success => true,
-          :data => album
+          :data => resAlbum
         }
       else
         render json: {
@@ -74,10 +80,14 @@ class TrackListsController < ApplicationController
   def destroy
     trackList = TrackList.find(params[:id])
     if trackList.destroy
-      album = TrackList.where(user_id: current_user.id).order('id ASC')
+      album = TrackList.where(user_id: current_user.id).order('id ASC').includes(:tracks)
+      resAlbum = album.as_json
+      resAlbum.each_with_index do |item, idx|
+        item['tracks'] = album[idx].tracks
+      end
       render json: {
         :success => true,
-        :data => album
+        :data => resAlbum
       }
     else
       render json: {

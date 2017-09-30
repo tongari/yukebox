@@ -7,6 +7,7 @@ const MyListCell = (props) => {
   const {
     myPlayList,
     deleteMyListTitle,
+    showYoutubePlayer,
   } = props;
 
   return (
@@ -42,13 +43,29 @@ const MyListCell = (props) => {
               <div className="p-myListCell__body">
                 <div>
                   <h2 className="p-myListCell__title u-space-b-XS">{item.title}</h2>
-                  <img src={`https://i.ytimg.com/vi/${thumb}/mqdefault.jpg`} width={320} alt="" />
+                  <button
+                    className="u-block"
+                    onClick={
+                      () => {
+                        showYoutubePlayer(item.tracks , 0, true);
+                      }
+                    }
+                  >
+                    <img src={`https://i.ytimg.com/vi/${thumb}/mqdefault.jpg`} width={320} alt="" />
+                  </button>
+
                 </div>
                 <ul className="p-myListCell__tool">
                   <li>
                     <a
                       className="p-myListCell__play"
                       href="#"
+                      onClick={
+                        (e) => {
+                          e.preventDefault();
+                          showYoutubePlayer(item.tracks , 0, true);
+                        }
+                      }
                     >&nbsp;</a>
                   </li>
                   <li>

@@ -8,6 +8,10 @@ const playList = (state = new App(), action) => {
       return state.set('csrfToken', action.value);
     }
 
+    case appActions.SET_LOG_IN_STATUS: {
+      return state.set('isLogin', action.isLogin);
+    }
+
     case appActions.CHANGE_DISPLAY_HEADER_TOOL: {
       return state.set('isDisplayHeaderTool', !state.get('isDisplayHeaderTool'));
     }

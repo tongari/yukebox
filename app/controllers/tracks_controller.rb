@@ -10,7 +10,7 @@ class TracksController < ApplicationController
 
   def create
     tracks = Track.where(track_id: params[:track_id])
-    if(tracks.count === 10)
+    if(tracks.count == 10)
       render json: {
         :success => false,
         :message => '１つのアルバムには10件以上は登録できません！'

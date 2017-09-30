@@ -2,6 +2,7 @@ import * as webApiUtils from '../webApiUtils/app';
 
 export const LOGOUT = 'LOGOUT';
 export const SET_CSRF_TOKEN = 'APP_SET_CSRF_TOKEN';
+export const SET_LOG_IN_STATUS = 'SET_LOG_IN_STATUS';
 export const CHANGE_DISPLAY_HEADER_TOOL = 'CHANGE_DISPLAY_HEADER_TOOL';
 export const HIDE_DISPLAY_HEADER_TOOL = 'HIDE_DISPLAY_HEADER_TOOL';
 export const SHOW_YOUTUBE_PLAYER = 'SHOW_YOUTUBE_PLAYER';
@@ -17,6 +18,18 @@ export const setCsrfToken = () => {
   return {
     type: SET_CSRF_TOKEN,
     value: token,
+  };
+};
+
+/**
+ * ログイン状況を保持
+ * @returns {{type: string, value}}
+ */
+export const setLoginStatus = () => {
+  const isLogin = !!document.querySelector("input[name='isLogin']").value;
+  return {
+    type: SET_LOG_IN_STATUS,
+    isLogin,
   };
 };
 
