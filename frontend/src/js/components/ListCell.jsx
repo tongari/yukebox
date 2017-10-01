@@ -2,7 +2,13 @@ import React from 'react';
 import { VelocityTransitionGroup } from 'velocity-react';
 
 const userThumb = (user) => {
-  return (user.provider !== '')? user.image_url : '/user.svg'
+  if (user.provider !== ''){
+    return user.image_url;
+  }
+  else if (user.avatar !== '') {
+    return user.avatar.url;
+  }
+  return '/user.svg';
 };
 
 const ListCell = (props) => {

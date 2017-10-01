@@ -39,7 +39,7 @@ const AddListModal = (props) => {
           value={playListTitle}
           onChange={onChangeMyListTitle}
         />
-          <a className="c-btn-default u-space-t-M" href="#" onClick={onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
+          <a className="c-btn-primary u-space-t-M" href="#" onClick={onSubmitMyListTitle}>{(isEditTitle) ? '編集' : '作成'}</a>
         </div>
         <button className="p-addListModal__closeModalButton" onClick={onClickAddListModal} />
       </div>

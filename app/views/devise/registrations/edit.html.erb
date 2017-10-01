@@ -1,55 +1,70 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="p-signIn">
+  <div class="p-signIn__panel">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+    <div class="p-signIn__panelInner">
+      <h2 class="p-signIn__panelHeading -text">ユーザ編集</h2>
+      <div class="p-signIn__panelBody c-group -space-M">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= devise_error_messages! %>
 
-  <!-- 名前入力用のフィールドを追加 -->
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, placeholder: "名前" %>
+            <div class="c-group -space-S">
+              <div class="field">
+                <%= f.label :メールアドレス, class:'u-inline-block' %><br />
+                <%= f.email_field :email, autofocus: true, class:'c-form__control' %>
+              </div>
+
+              <!-- 名前入力用のフィールドを追加 -->
+              <div class="field c-group -space-XS">
+                <%= f.label :名前, class:'u-inline-block' %><br />
+                <%= f.text_field :name, class:'c-form__control' %>
+              </div>
+              <% if @user.provider.blank? %>
+                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                  <% end %>
+
+                  <div class="field c-group -space-XS">
+                    <%= f.label :新しいパスワード, class:'u-inline-block' %><br />
+                    <% if @minimum_password_length %>
+                        <p class="">(<%= @minimum_password_length %> 文字以上 〜 <%= resource_class.password_length.max %>文字以下)</p>
+                    <% end %>
+                    <%= f.password_field :password, autocomplete: 'off', placeholder:'新しいパスワード', class: 'c-form__control' %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder:'新しいパスワード確認', class: 'c-form__control' %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.password_field :current_password, autocomplete: 'off', placeholder:'現在のパスワード', class:'c-form__control' %>
+                  </div>
+              <% end %>
+
+              <div class="field p-signIn__thumb">
+                <%= profile_img(@user) if profile_img(@user) %>
+                <%= f.file_field :avatar, class:'' %>
+                <%= f.hidden_field :avatar_cache %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit '更新', class:'c-btn-primary -block' %>
+              </div>
+            </div>
+
+        <% end %>
+
+        <%= button_to 'アカウント削除', registration_path(resource_name), data: { confirm: '削除してよいですか？' }, method: :delete, class:'c-btn-danger -block' %>
+
+        <div class="">
+          <%= link_to '戻る', :back, class: 'u-text-link' %>
+        </div>
+
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= profile_img(@user) if profile_img(@user) %>
-    <%= f.file_field :avatar %>
-    <%= f.hidden_field :avatar_cache %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

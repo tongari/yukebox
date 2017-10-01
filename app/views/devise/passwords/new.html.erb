@@ -1,16 +1,26 @@
-<h2>Forgot your password?</h2>
+<section class="p-signIn">
+  <div class="p-signIn__panel">
+    <%= devise_error_messages! %>
+    <div class="p-signIn__panelInner">
+      <h1 class="p-signIn__panelHeading"></h1>
+      <div class="p-signIn__panelBody">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <div class="c-group -space-S">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+              <div class="field">
+                <%= f.email_field :email, autofocus: true , placeholder: 'メールアドレス', class: 'c-form__control' %>
+              </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+              <div class="actions">
+                <%= f.submit 'パスワードを再設定する', class: 'c-btn-primary -block' %>
+              </div>
+            </div>
+
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

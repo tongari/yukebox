@@ -1,0 +1,57 @@
+.p-signIn{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__panel{
+    max-width: calc(600px - 20px);
+    width: calc(100% - 20px);
+    margin-top: -100px;
+    text-align: center;
+
+    &Inner{
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    &Heading{
+      background-color: #f5f5f5;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      text-align: center;
+
+      &.-text{
+        font-size: $f-font-size-L;
+        padding: $f-margin-S;
+        &:before{
+          display: none;
+        }
+      }
+
+      &:before{
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        background-image: url('/logo.svg');
+        background-position: 0 50%;
+        width: 100px;
+        height: 65px;
+      }
+    }
+
+    &Body{
+      padding: $f-margin-M;
+    }
+  }
+
+  &__thumb{
+    > img{
+      width: 40px;
+      border-radius: 50%;
+    }
+  }
+}

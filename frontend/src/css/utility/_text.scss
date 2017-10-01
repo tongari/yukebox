@@ -42,4 +42,10 @@
   &-text-underline {
     text-decoration: underline;
   }
+  &-text-link{
+    color: $f-text-link;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
