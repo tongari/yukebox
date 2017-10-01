@@ -1,6 +1,10 @@
 import React from 'react';
 import { VelocityTransitionGroup } from 'velocity-react';
 
+const userThumb = (user) => {
+  return (user.provider !== '')? user.image_url : '/user.svg'
+};
+
 const ListCell = (props) => {
   const {
     playList,
@@ -51,7 +55,7 @@ const ListCell = (props) => {
                 </div>
                 <div className="p-listCell__info c-group -space-XS">
                   <h2 className="p-listCell__title u-space-b-M">{item.title}</h2>
-                  <img className="p-listCell__userThumb" src={item.user.image_url} width={40} alt="" />
+                  <img className="p-listCell__userThumb" src={userThumb(item.user)} width={40} alt="" />
                   <p>{item.user.name}</p>
                 </div>
               </a>

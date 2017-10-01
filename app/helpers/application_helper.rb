@@ -3,8 +3,8 @@ module ApplicationHelper
     unless user.provider.blank?
       img_url = user.image_url
     else
-      img_url = 'def_profile.svg'
+      img_url = 'user.svg'
     end
-    image_tag(img_url, alt: user.name)
+    image_tag(img_url, width: 80, alt: user.name)
   end
 end

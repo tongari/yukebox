@@ -6,7 +6,8 @@ class TrackListsController < ApplicationController
       item['tracks'] = trackLists[idx].tracks
       item['user'] = {
         :name => trackLists[idx].user.name,
-        :image_url => trackLists[idx].user.image_url
+        :image_url => trackLists[idx].user.image_url,
+        :provider => trackLists[idx].user.provider
       }
     end
     render json: {
