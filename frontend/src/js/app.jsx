@@ -31,3 +31,13 @@ if (document.getElementById('app')) {
     document.getElementById('app'),
   );
 }
+
+
+const accountDelete = document.querySelector('.js-accountDelete');
+accountDelete && accountDelete.addEventListener('click', (e)=> {
+  const isDelete = window.confirm('アカウントを削除しますか？');
+  if (!isDelete) {
+    e.preventDefault();
+    return;
+  }
+});

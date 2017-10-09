@@ -1,8 +1,18 @@
 class SpaController < ApplicationController
   def index
 
+    # リファラーを取得
+    referrerInfo = Rails.application.routes.recognize_path(request.referrer)
+
     # ログインしていない場合
     if !user_signed_in?
+
+      # サインアップを踏んで、まだメール認証していない場合ログイン画面へ遷移させる
+      # メール認証してねの文言を見せたいのとログインを促すため
+      if referrerInfo[:controller] == 'users/registrations' && referrerInfo[:action] == 'new'
+        redirect_to new_user_session_path
+      end
+
       # トップのurlの以外はログインページへリダイレクト
       if request.path != '/'
         redirect_to new_user_session_path
