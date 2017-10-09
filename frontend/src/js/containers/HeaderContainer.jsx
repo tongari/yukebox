@@ -65,6 +65,19 @@ class HeaderContainer extends React.Component {
     return null;
   }
 
+  editMyAccount() {
+    if (this.props.store.app.get('isLogin')) {
+      return(
+        <li>
+          <a href="/users/edit" className="p-header__Account">
+            アカウント設定
+          </a>
+        </li>
+      )
+    }
+    return null;
+  }
+
   render() {
     return (
       <div>
@@ -76,6 +89,7 @@ class HeaderContainer extends React.Component {
           <nav className={this.toolStyle()}>
             <ul className="p-header__toolBody c-group -space-S">
               {this.logInOutButton()}
+              {this.editMyAccount()}
               <li>
                 <Link to="/" className="p-header__playList">
                   みんなのプレイリスト
