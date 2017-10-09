@@ -90,11 +90,6 @@ class HeaderContainer extends React.Component {
             <ul className="p-header__toolBody c-group -space-S">
               {this.logInOutButton()}
               {this.editMyAccount()}
-              <li>
-                <Link to="/" className="p-header__playList">
-                  みんなのプレイリスト
-                </Link>
-              </li>
               {this.myPlayListButton()}
             </ul>
           </nav>

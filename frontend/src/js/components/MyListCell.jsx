@@ -3,6 +3,13 @@ import { VelocityTransitionGroup } from 'velocity-react';
 import { Link } from 'react-router-dom';
 import routerPath from '../config/router';
 
+
+const onClickDeleteMyList = (deleteMyListTitle, id)=> {
+  const isDelete = window.confirm('プレイリストを削除しますか？');
+  if (!isDelete) return;
+  deleteMyListTitle(id);
+};
+
 const MyListCell = (props) => {
   const {
     myPlayList,
@@ -72,7 +79,7 @@ const MyListCell = (props) => {
                       onClick={
                         (e) => {
                           e.preventDefault();
-                          deleteMyListTitle(item.id);
+                          onClickDeleteMyList(deleteMyListTitle, item.id);
                         }
                       }
                     >&nbsp;</a>

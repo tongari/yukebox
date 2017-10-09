@@ -15,7 +15,7 @@ const fetch = (action, csrfToken = null) => {
       if (xhr.readyState === 4 && xhr.status < 400) {
         // ログアウトはRailsのDeviseを使ってるためJSON返却形式が違うのでここでハードコート処理
         if (action.payload.request.url === '/users/sign_out') {
-          window.location.href = '/users/sign_in';
+          window.location.href = '/';
           return;
         }
 

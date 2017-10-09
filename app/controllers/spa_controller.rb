@@ -9,7 +9,7 @@ class SpaController < ApplicationController
 
       # サインアップを踏んで、まだメール認証していない場合ログイン画面へ遷移させる
       # メール認証してねの文言を見せたいのとログインを促すため
-      if referrerInfo[:controller] == 'users/registrations' && referrerInfo[:action] == 'new'
+      if referrerInfo && referrerInfo[:controller] == 'users/registrations' && referrerInfo[:action] == 'new'
         redirect_to new_user_session_path
       end
 

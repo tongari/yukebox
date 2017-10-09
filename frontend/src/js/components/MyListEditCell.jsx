@@ -16,6 +16,12 @@ const disableDownBtn = (idx, itemsLen) => {
   return (idx === itemsLen - 1) ? 'is-disable' : '';
 };
 
+const onClickDeleteButton = (deleteTrack, id, urlId) => {
+  const isDelete = window.confirm('曲を削除しますか？');
+  if (!isDelete) return;
+  deleteTrack(id, urlId);
+};
+
 const MyListEditCell = (props) => {
   const {
     myPlayList,
@@ -89,7 +95,7 @@ const MyListEditCell = (props) => {
                       onClick={
                         (e) => {
                           e.preventDefault();
-                          deleteTrack(item.id, urlId);
+                          onClickDeleteButton(deleteTrack, item.id, urlId);
                         }
                       }
                     >&nbsp;</a>
