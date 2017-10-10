@@ -1,25 +1,33 @@
-<h2>Change your password</h2>
+<section class="p-signIn">
+  <div class="p-signIn__panel">
+    <%= devise_error_messages! %>
+    <div class="p-signIn__panelInner">
+      <h1 class="p-signIn__panelHeading"></h1>
+      <div class="p-signIn__panelBody">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.hidden_field :reset_password_token %>
+          <div class="c-group -space-S">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+            <div class="field">
+              <% if @minimum_password_length %>
+                  <%= @minimum_password_length %> 文字以上 〜 <%= resource_class.password_length.max %>文字以下
+              <% end %><br>
+              <%= f.password_field :password, autofocus: true, autocomplete: 'off', placeholder: '新しいパスワード', class: 'c-form__control' %>
+            </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+            <div class="field">
+              <%= f.password_field :password_confirmation, autocomplete: 'off', placeholder: '新しいパスワードの確認', class: 'c-form__control' %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit 'パスワードを変更する', class: 'c-btn-primary -block u-text-size-M' %>
+            </div>
+          </div>
+
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>

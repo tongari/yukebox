@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      track: "曲"
+      track_list: "プレイリスト"
+      user: "ユーザー"
+    attributes:
+      track:
+        title: "タイトル"
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        current_password: "現在のパスワード"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
