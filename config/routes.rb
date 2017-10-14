@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :tracks, only:[:show, :create, :destroy]
 
   # SPA（フロント側と対応する）のルーティング
-  root 'spa#index'
+  root 'spa#root'
   get '/my-play-list/', to: 'spa#index'
   get '/my-play-list-edit/:id', to: 'spa#index'
 

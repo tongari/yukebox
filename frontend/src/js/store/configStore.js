@@ -7,7 +7,7 @@ import httpRequestMiddleware from '../middleware/httpRequestMiddleware';
 
 export default function configureStore() {
   // prod環境か否かを返却
-  const isProdEnv = () => (process.env.NODE_ENV === 'prod');
+  const isProdEnv = () => (process.env.NODE_ENV === 'production');
 
   const middleware = [
     thunk,

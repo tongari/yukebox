@@ -9,6 +9,7 @@ const fetch = (action, csrfToken = null) => {
     const xhr = new XMLHttpRequest();
     xhr.open(action.payload.request.method, action.payload.request.url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     if (action.payload.request.method.toUpperCase() !== 'GET') xhr.setRequestHeader('X-CSRF-Token', csrfToken);
 
     xhr.onreadystatechange = () => {

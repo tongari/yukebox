@@ -44,3 +44,21 @@
 #       track_title: track_title
 #   )
 # end
+
+10.times do |idx|
+  name = Faker::Name.name
+  email = Faker::Internet.email
+  password = 'testtest'
+  User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    provider: '',
+    uid: SecureRandom.uuid,
+    current_sign_in_at: Time.new,
+    last_sign_in_at: Time.new,
+    confirmed_at: Time.new,
+    confirmation_sent_at: Time.new
+  )
+end

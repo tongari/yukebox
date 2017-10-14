@@ -47,6 +47,8 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'rails_12factor', group: :production
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -56,3 +58,4 @@ gem 'mini_magick'
 gem 'pry-rails'
 gem 'better_errors'
 gem 'activerecord-import'
+gem 'faker'

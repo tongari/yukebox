@@ -1,4 +1,10 @@
 class SpaController < ApplicationController
+
+  # twitterログイン時に明示的にリダイレクトさせないと404となるため
+  def root
+    render 'index'
+  end
+
   def index
 
     # リファラーを取得
